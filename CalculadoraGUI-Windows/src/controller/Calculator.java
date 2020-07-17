@@ -971,8 +971,8 @@ public class Calculator {
     }
 
     public void inputTextKeyPressedAction(java.awt.event.KeyEvent evt) {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER ||
-                evt.getKeyCode() == KeyEvent.VK_EQUALS) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER  ||
+               !evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_EQUALS) {
             equalsAction();
         } else if (evt.getKeyCode() == KeyEvent.VK_DIVIDE
                 || evt.getKeyCode() == KeyEvent.VK_SLASH
