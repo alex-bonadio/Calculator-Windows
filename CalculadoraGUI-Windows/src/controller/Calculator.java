@@ -1050,7 +1050,7 @@ public class Calculator {
         if (num >= max || num <= -max
                 || Double.valueOf(start.inputText.getText()) >= max
                 || Double.valueOf(start.inputText.getText()) <= -max) {
-            start.inputText.setText("Exceeded Calculation");
+            start.inputText.setText("Calculation Exceeded");
             start.labelExp.setText(mathExpression);
             cleanVariables(2);
             cleanVariables(4);
