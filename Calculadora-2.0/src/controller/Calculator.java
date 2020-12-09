@@ -164,12 +164,12 @@ public class Calculator {
         boolean check = validateNumber();  // a entrada do usuário é validada
         if (check == true) {  // se passou no teste de validação
             maxNumber(number);  // verifica se o número digitado ou calculado não passou do limite do double
-            if (operation != op && operation != 0 // se não é a operação escolhida anteriormente e não é a primeira operação [0], então o botão de operação faz o papel do igual
+            if (operation != op && operation != 0 // se não é a mesma operação escolhida anteriormente e não é a primeira operação [0], então o botão de operação faz o papel do igual
                     && numpadTyped == true) {  // o usuário já digitou um número, mas a operação escolhida anteriormente não é a mesma que a atual
                 executeAnotherOperation(op);  // então é chamado o método para fazer o cálculo de outra operação
             }
-            if (operation != op && operation != 0 && secondOpTyped == true // se a operação escolhida não for a atual, ex: soma e o usuário já clicou em algum botão das operações aritmétcas 1 ou 2 vezes
-                    || operation != op && operation != 0 && firstOpTyped == true) { // então é troca de sinal e não é para fazer uma operação
+            if (operation != op && operation != 0 && secondOpTyped == true // se a operação escolhida não for a mesma da anterior e o usuário já clicou em algum botão das operações aritmétcas 1 ou 2 vezes
+                    || operation != op && operation != 0 && firstOpTyped == true) { // então ele trocou de operação, escolheru outra
                 executeChangeSignal(op);  // método que troca de sinal, de + para - por exemplo
             }
             if (operation == op && numpadTyped == true // se a operação escolhida foi adição, por ex: e o usuário já digitou o número no display
@@ -928,22 +928,22 @@ public class Calculator {
             if (operation == 0 || operation == 1 || operation == 2 // se as operações não forem de porcentagem
                     || operation == 3 || operation == 4
                     || operation == 5 || operation == 6) {
+                
+                    String input = start.inputText.getText();      // salva a entrada do usuário em input
+                    StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
+                    input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
+                    start.inputText.setText(input);               // exibe a string no display principal 
 
-                String input = start.inputText.getText();      // salva a entrada do usuário em input
-                StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
-                input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
-                start.inputText.setText(input);               // exibe a string no display principal 
-
-                if (input.length() == 0 || start.inputText.getText().equals("-")) {  // se o tamanho da string for 0 ou se o número for negativo
-                    input = "";    // não a deixa nula e apaga o -(número negativo)
-                    writeZero();   // depois imprime o zero
-                }
-                if (numpadTyped == true) {          // se já foi digitado algum número  
-                    start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
-                }
-                numpadTyped = true;
-                firstOpTyped = false;
-                secondOpTyped = false;
+                    if (input.length() == 0 || start.inputText.getText().equals("-")) {  // se o tamanho da string for 0 ou se o número for negativo
+                        input = "";    // não a deixa nula e apaga o -(número negativo)
+                        writeZero();   // depois imprime o zero
+                    }
+                    if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
+                        start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+                    }
+//                    numpadTyped = true;
+//                    firstOpTyped = false;
+//                    secondOpTyped = false;
             }
             focus();
         }
@@ -971,8 +971,8 @@ public class Calculator {
     }
 
     public void inputTextKeyPressedAction(java.awt.event.KeyEvent evt) {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER  ||
-               !evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_EQUALS) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER
+                || !evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_EQUALS) {
             equalsAction();
         } else if (evt.getKeyCode() == KeyEvent.VK_DIVIDE
                 || evt.getKeyCode() == KeyEvent.VK_SLASH
@@ -1038,7 +1038,7 @@ public class Calculator {
         } else if (evt.getKeyCode() == KeyEvent.VK_E) {
             bCleanNumAction();
         } else if (evt.getKeyCode() == KeyEvent.VK_P) {
-            calculationHub((short) 5);
+            calculationHub((short) 5); // Potenciação
         } else if (evt.getKeyCode() == KeyEvent.VK_R) {
             calculationHub((short) 6);
         }
