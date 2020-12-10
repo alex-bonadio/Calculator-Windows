@@ -1046,7 +1046,7 @@ public class Calculator {
 
     public boolean maxNumber(double num) {
         boolean check = true;
-        double max = Math.pow(2, 63);
+        double max = Math.pow(2, 64);
         if (num >= max || num <= -max
                 || Double.valueOf(start.inputText.getText()) >= max
                 || Double.valueOf(start.inputText.getText()) <= -max) {
