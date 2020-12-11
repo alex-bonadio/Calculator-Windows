@@ -56,7 +56,7 @@ public class Calculator {
                 break;
             case 2: // apaga váriaveis e reseta valores de outras
                 start.labelExp.setText("");
-                mathExpression = " ";
+                mathExpression = "";
                 number = 0;
                 operation = 0;
                 countOpClick = 0;
@@ -818,6 +818,7 @@ public class Calculator {
         }
         focus();
     }
+
     // método altera para FALSE as variáveis que salvam se o usuário
     // deu o primeiro ou segundo click nos botõe de operação
     public void pressedOpButton() {
@@ -850,6 +851,8 @@ public class Calculator {
             }
             numpadTyped = true;
             focus();
+        } else if (start.inputText.getText().equals("0")) { // se o número for 0, então é impresso no 2º display
+            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
         }
     }
 
