@@ -47,12 +47,12 @@ public class Calculator {
         return check;
     }
 
-    // método limpa as variáveis de instância de acordo com o level escolhido
+    // método limpa as variáveis de instância de acordo com o nível escolhido
     public void cleanVariables(int level) {
         switch (level) {
             case 1:
-                mathExpression = "";
-                start.labelExp.setText("");
+                mathExpression = ""; // apaga a mensagem que é exibida no 2º display
+                start.labelExp.setText(""); // apaga o 2º display
                 break;
             case 2:
                 start.labelExp.setText("");
@@ -814,23 +814,19 @@ public class Calculator {
         focus();
     }
 
+    // // método do botão 0
     public void b0Action() {
         validateNumber();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "0");
-        String input = "";
-        input = input + "" + start.inputText.getText();
-        int i = input.length() - 1;
-        StringBuilder str = new StringBuilder(input);
-        if (input.charAt(0) == '0' && i == 1 && input.charAt(1) != '.') {
-            input = String.valueOf(str.deleteCharAt(input.length() - 1));
-            start.inputText.setText(input);
+        if(!start.inputText.getText().equals("0")){
+         start.inputText.setText(start.inputText.getText() + "0");
         }
-        start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        start.labelExp.setText(mathExpression + " " + start.inputText.getText());        
         numpadTyped = true;
         focus();
     }
 
+    // // método do botão 1
     public void b1Action() {
         validateNumber();
         replaceZero();
@@ -841,6 +837,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 2
     public void b2Action() {
         validateNumber();
         replaceZero();
@@ -851,6 +848,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 3
     public void b3Action() {
         validateNumber();
         replaceZero();
@@ -861,6 +859,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 4
     public void b4Action() {
         validateNumber();
         replaceZero();
@@ -871,6 +870,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 5
     public void b5Action() {
         validateNumber();
         replaceZero();
@@ -881,6 +881,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 6
     public void b6Action() {
         validateNumber();
         replaceZero();
@@ -891,6 +892,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 7
     public void b7Action() {
         validateNumber();
         replaceZero();
@@ -901,6 +903,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 8
     public void b8Action() {
         validateNumber();
         replaceZero();
@@ -911,6 +914,7 @@ public class Calculator {
         focus();
     }
 
+    // método do botão 9
     public void b9Action() {
         validateNumber();
         replaceZero();
@@ -928,27 +932,25 @@ public class Calculator {
             if (operation == 0 || operation == 1 || operation == 2 // se as operações não forem de porcentagem
                     || operation == 3 || operation == 4
                     || operation == 5 || operation == 6) {
-                
-                    String input = start.inputText.getText();      // salva a entrada do usuário em input
-                    StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
-                    input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
-                    start.inputText.setText(input);               // exibe a string no display principal 
 
-                    if (input.length() == 0 || start.inputText.getText().equals("-")) {  // se o tamanho da string for 0 ou se o número for negativo
-                        input = "";    // não a deixa nula e apaga o -(número negativo)
-                        writeZero();   // depois imprime o zero
-                    }
-                    if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
-                        start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
-                    }
-//                    numpadTyped = true;
-//                    firstOpTyped = false;
-//                    secondOpTyped = false;
+                String input = start.inputText.getText();      // salva a entrada do usuário em input
+                StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
+                input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
+                start.inputText.setText(input);               // exibe a string no display principal 
+
+                if (input.length() == 0 || start.inputText.getText().equals("-")) {  // se o tamanho da string for 0 ou se o número for negativo
+                    input = "";    // não a deixa nula e apaga o -(número negativo)
+                    writeZero();   // depois imprime o zero
+                }
+                if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
+                    start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+                }
             }
             focus();
         }
     }
 
+    // método do botão Negativo, escreve por ex: (-45) no 2º display e -45 no principal
     public void bFloatAction() {
         boolean check = validateNumber();
         if (!start.inputText.getText().contains(".") && check == true) {
@@ -961,104 +963,110 @@ public class Calculator {
         focus();
     }
 
+    // método do botão CE, apaga o último número digitado
     public void bCleanNumAction() {
         String input = start.inputText.getText();
         StringBuilder str = new StringBuilder(input);
         input = String.valueOf(str.delete(0, str.length()));
         start.inputText.setText(input);
         start.labelExp.setText(mathExpression + input);
-        writeZero();
+        writeZero(); // depois de apagar, escreve zero no display principal
     }
 
+    // método que captura a ação de pressionar as teclas do teclado físico
     public void inputTextKeyPressedAction(java.awt.event.KeyEvent evt) {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER // enter, aciona o método do botão igual
                 || !evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_EQUALS) {
-            equalsAction();
+            equalsAction(); // tecla =, aciona o método do botão de igual
         } else if (evt.getKeyCode() == KeyEvent.VK_DIVIDE
                 || evt.getKeyCode() == KeyEvent.VK_SLASH
                 || evt.getKeyCode() == KeyEvent.VK_BACK_SLASH
                 || evt.getKeyCode() == KeyEvent.VK_D) {
-            calculationHub((short) 4);
+            calculationHub((short) 4); // divisão
         } else if (evt.getKeyCode() == KeyEvent.VK_MULTIPLY
                 || evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_8
                 || evt.getKeyCode() == KeyEvent.VK_M) {
-            calculationHub((short) 3);
+            calculationHub((short) 3); // multiplicação 
         } else if (evt.getKeyCode() == KeyEvent.VK_SUBTRACT
                 || evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_MINUS
                 || evt.getKeyCode() == KeyEvent.VK_S) {
-            calculationHub((short) 2);
+            calculationHub((short) 2); // subtração
         } else if (evt.getKeyCode() == KeyEvent.VK_ADD
                 || evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_EQUALS
                 || evt.getKeyCode() == KeyEvent.VK_A) {
-            calculationHub((short) 1);
+            calculationHub((short) 1); // adição
         } else if (evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_5) {
-            percentStart();
+            percentStart(); // porcentagem
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD0
                 || evt.getKeyCode() == KeyEvent.VK_0) {
-            b0Action();
+            b0Action(); // 0
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD1
                 || evt.getKeyCode() == KeyEvent.VK_1) {
-            b1Action();
+            b1Action(); // 1
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD2
                 || evt.getKeyCode() == KeyEvent.VK_2) {
-            b2Action();
+            b2Action(); // 2
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD3
                 || evt.getKeyCode() == KeyEvent.VK_3) {
-            b3Action();
+            b3Action(); // 3
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD4
                 || evt.getKeyCode() == KeyEvent.VK_4) {
-            b4Action();
+            b4Action(); // 4
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD5
                 || evt.getKeyCode() == KeyEvent.VK_5) {
-            b5Action();
+            b5Action(); // 5
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD6
                 || evt.getKeyCode() == KeyEvent.VK_6) {
-            b6Action();
+            b6Action(); // 6
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD7
                 || evt.getKeyCode() == KeyEvent.VK_7) {
-            b7Action();
+            b7Action(); // 7
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD8
                 || evt.getKeyCode() == KeyEvent.VK_8) {
-            b8Action();
+            b8Action(); // 8
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD9
                 || evt.getKeyCode() == KeyEvent.VK_9) {
-            b9Action();
+            b9Action(); // 9
         } else if (evt.getKeyCode() == KeyEvent.VK_DECIMAL
                 || evt.getKeyCode() == KeyEvent.VK_PERIOD) {
-            bFloatAction();
+            bFloatAction(); // .
         } else if (evt.getKeyCode() == KeyEvent.VK_MINUS) {
             validateNumber();
-            negativeNumber();
+            negativeNumber(); // sinal de negativo
         } else if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            backSpaceAction();
-        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            cleanVariables(2);
+            backSpaceAction(); // backspace
+        } else if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) { // botão C de apagar a memória
+            cleanVariables(2);  // apaga as variáveis
             cleanVariables(3);
             cleanVariables(4);
+            writeZero(); // depois de apagar a memória, escreve o 0 no display principal
         } else if (evt.getKeyCode() == KeyEvent.VK_E) {
-            bCleanNumAction();
-        } else if (evt.getKeyCode() == KeyEvent.VK_P) {
+            bCleanNumAction(); // botão de apagar o último número digitado
+        } else if (evt.getKeyCode() == KeyEvent.VK_P
+                || evt.isShiftDown() && evt.getKeyCode() == KeyEvent.VK_DEAD_TILDE) {
             calculationHub((short) 5); // Potenciação
         } else if (evt.getKeyCode() == KeyEvent.VK_R) {
-            calculationHub((short) 6);
+            calculationHub((short) 6); // raiz quadrada
         }
     }
 
+    // método que configura o maior número que a calculadora suporta, ((2^63)-2) positivo ou negativo)
     public boolean maxNumber(double num) {
         boolean check = true;
         double max = Math.pow(2, 63);
-        if (num >= max || num <= -max
+        if (num >= max || num <= -max // se o número chegou ao limite da calculadora
                 || Double.valueOf(start.inputText.getText()) >= max
                 || Double.valueOf(start.inputText.getText()) <= -max) {
-            start.inputText.setText("Calculation Exceeded");
-            start.labelExp.setText(mathExpression);
-            cleanVariables(2);
+            start.inputText.setText("Calculation Exceeded"); // então exibe Cálculo Excedido
+            //        start.labelExp.setText(mathExpression);
+            cleanVariables(2); // apaga as variaveis, se excedeu o número máximo
             cleanVariables(4);
             check = false;
         }
         return check;
     }
 
+    // seção de todos os Getters e Setters
     public short getOperation() {
         return operation;
     }
