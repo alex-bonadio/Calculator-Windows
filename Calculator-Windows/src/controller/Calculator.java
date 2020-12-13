@@ -18,7 +18,7 @@ public class Calculator {
     private boolean firstOpTyped = false;    // muda para true quando o usuário clicar a 1º vez em um dos botões de operações aritiméticas
     private boolean secondOpTyped = false;   // muda para true quando o usuário clicar a 2º vez em um dos botões de operações aritiméticas
     private String mathExpression = "";      // é a string que armazena o que o usuário está fazendo na calculadora, para exibir no JLabel abaixo do Display principal
-    private Start start;                     // é uma cópia da variável de referência do objeto da Classe Start para podermos interagir com os componente gráficos da Calculadora
+    private Start start;                     // é uma cópia da variável de referência do objeto da Classe Start para manipular os componentes gráficos da Calculadora
 
     public Calculator() {
     }
@@ -32,12 +32,11 @@ public class Calculator {
     public boolean validateNumber() {
         boolean check = true;  // se a entrada está correta, ou seja, possui apenas números ou o E, então é true
         if (!start.inputText.getText().isEmpty()) {
-            //    int i = start.inputText.getText().length() - 1;
             if (start.inputText.getText().contains("Impossible")
                     || start.inputText.getText().contains("Exceed")) {
-                cleanVariables(2);
-                cleanVariables(3);
-                writeZero();
+                cleanVariables(2);  // Se no 1º Display (Principal) tiver as palavras Impossible ou Exceed 
+                cleanVariables(3); // então várias variáveis são apagadas e reinicializadas
+                writeZero();      // depois de apagá-las é impresso 0 no Display Principal 
                 check = false;  // false significa que não passou no teste, tem caracteres inválidos
             } else {
                 // start.inputText.getText().matches("^[-0.0-9.0]*$");
@@ -83,7 +82,7 @@ public class Calculator {
     // método faz o direcionamento para os métodos de cálculo de acordo com a escolha do usuário
     public void arithmetic() {
         boolean check = validateNumber();
-        if (check == true) {  // se o número digitado está OK e não está vazio
+        if (check == true) {  // se o número digitado está OK, ou seja, não são letras ou não é nulo
             switch (operation) { // operação aritmética Simples escolhida pelo usuário
                 case 1:  // caso 1 Adição Simples, exemplo: 2 + 2 = 4
                     simpleSum();
@@ -91,19 +90,19 @@ public class Calculator {
                 case 2:  // caso 2 Subtração Simples, exemplo: 2 - 2 = 0
                     simpleSub();
                     break;
-                case 3:
+                case 3:  // Multiplicação
                     simpleMult();
                     break;
-                case 4:
+                case 4: // Divisão
                     simpleDiv();
                     break;
-                case 5:
+                case 5: 
                     simplePow(); // Potenciação
                     break;
                 case 6:
                     simpleRoot(); // raiz quadrada
                     break;
-                case 7:               // caso 7, chama o método da porcentagem
+                case 7:               // caso 7, chama o método que calcula utilizando porcentagem
                     percentCalc();   // com soma
                     break;
                 case 8:
@@ -120,12 +119,12 @@ public class Calculator {
     }
 
     // método do botão de igual
-    public void equalsAction() {
-        boolean check = validateNumber();
-        if (check == true) {
-            maxNumber(number);
-            arithmetic();
-            formatLimit(operation);
+    public void equalsAction() { // chama os métodos que fazem os cálculos
+        boolean check = validateNumber(); // verifica se o resultado do cálculo não ultrapassou o limite da calculadora ou se tem algum caractere, ao invés de números
+        if (check == true) { // TRUE significa que o número está OK
+            maxNumber(number); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
+            arithmetic();  // este método chama os métodos de operação aritmética simples, ex: 2 + 2, 4-2, 10 * 2 ... 
+            formatLimit(operation); // este método verifica se o tamanho da string do 2º display é maior do que o tamanho do próprio jLabel que mostra a expressão matemática, e a apaga totalmente se ultrapassar o seu limite, e só exibe o resultado do último cálculo realizado
             if (equalsClick == 1) { // se o usuário clicou mais de uma vez no igual, então é feito a acumulação do resultado
                 switch (accOperation) {
                     case 1:
@@ -147,10 +146,10 @@ public class Calculator {
                         break;
                 }
             }
-            cleanVariables(2);
-            firstOpTyped = true;
-            numpadTyped = true;
-            equalsClick = 1;
+            cleanVariables(2);     // apaga váriaveis e reseta valores de outras
+            firstOpTyped = true;  // mantém registrado que o usuário clicou uma vez em algo botão de Operação Aritmética 
+            numpadTyped = true;  // mantém registrado que o usuário clicou em algum algarismo
+            equalsClick = 1;    // registra que o usuário clicou 1 vez no botão de igual
         }
         focus();
     }
