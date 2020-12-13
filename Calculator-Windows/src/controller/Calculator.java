@@ -4,7 +4,7 @@ import view.Start;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Code Lines: 1714 Classe: 1261 Methods: 77
+ * @author Alex Bonadio Code Lines: 1368 Classe: 1309 Methods: 78
  */
 public class Calculator {
 
@@ -33,7 +33,7 @@ public class Calculator {
         boolean check = true;  // se a entrada está correta, ou seja, possui apenas números ou o E, então é true
         if (!start.inputText.getText().isEmpty()) {
             if (start.inputText.getText().contains("Impossible")
-                    || start.inputText.getText().contains("Exceed")) {
+                    || start.inputText.getText().contains("Exceeded")) {
                 cleanVariables(2);  // Se no 1º Display (Principal) tiver as palavras Impossible ou Exceed 
                 cleanVariables(3); // então várias variáveis são apagadas e reinicializadas
                 writeZero();      // depois de apagá-las é impresso 0 no Display Principal 
@@ -96,7 +96,7 @@ public class Calculator {
                 case 4: // Divisão
                     simpleDiv();
                     break;
-                case 5: 
+                case 5:
                     simplePow(); // Potenciação
                     break;
                 case 6:
@@ -122,34 +122,36 @@ public class Calculator {
     public void equalsAction() { // chama os métodos que fazem os cálculos
         boolean check = validateNumber(); // verifica se o resultado do cálculo não ultrapassou o limite da calculadora ou se tem algum caractere, ao invés de números
         if (check == true) { // TRUE significa que o número está OK
-            maxNumber(number); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
-            arithmetic();  // este método chama os métodos de operação aritmética simples, ex: 2 + 2, 4-2, 10 * 2 ... 
-            formatLimit(operation); // este método verifica se o tamanho da string do 2º display é maior do que o tamanho do próprio jLabel que mostra a expressão matemática, e a apaga totalmente se ultrapassar o seu limite, e só exibe o resultado do último cálculo realizado
-            if (equalsClick == 1) { // se o usuário clicou mais de uma vez no igual, então é feito a acumulação do resultado
-                switch (accOperation) {
-                    case 1:
-                        accSum();   // função acumuladora de Soma da Calculadora 
-                        break;
-                    case 2:
-                        accSub();   // função acumuladora de Subtração da Calculadora 
-                        break;
-                    case 3:
-                        accMult();
-                        break;
-                    case 4:
-                        accDiv();
-                        break;
-                    case 5:
-                        accPow(); // função acumuladora de potenciação
-                        break;
-                    default:
-                        break;
+            boolean validado = maxNumber(number); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
+            if (validado == true) {
+                arithmetic();  // este método chama os métodos de operação aritmética simples, ex: 2 + 2, 4-2, 10 * 2 ... 
+                formatLimit(operation); // este método verifica se o tamanho da string do 2º display é maior do que o tamanho do próprio jLabel que mostra a expressão matemática, e a apaga totalmente se ultrapassar o seu limite, e só exibe o resultado do último cálculo realizado
+                if (equalsClick == 1) { // se o usuário clicou mais de uma vez no igual, então é feito a acumulação do resultado
+                    switch (accOperation) {
+                        case 1:
+                            accSum();   // função acumuladora de Soma da Calculadora 
+                            break;
+                        case 2:
+                            accSub();   // função acumuladora de Subtração da Calculadora 
+                            break;
+                        case 3:
+                            accMult();
+                            break;
+                        case 4:
+                            accDiv();
+                            break;
+                        case 5:
+                            accPow(); // função acumuladora de potenciação
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                cleanVariables(2);     // apaga váriaveis e reseta valores de outras
+                firstOpTyped = true;  // mantém registrado que o usuário clicou uma vez em algo botão de Operação Aritmética 
+                numpadTyped = true;  // mantém registrado que o usuário clicou em algum algarismo
+                equalsClick = 1;    // registra que o usuário clicou 1 vez no botão de igual
             }
-            cleanVariables(2);     // apaga váriaveis e reseta valores de outras
-            firstOpTyped = true;  // mantém registrado que o usuário clicou uma vez em algo botão de Operação Aritmética 
-            numpadTyped = true;  // mantém registrado que o usuário clicou em algum algarismo
-            equalsClick = 1;    // registra que o usuário clicou 1 vez no botão de igual
         }
         focus();
     }
@@ -174,8 +176,8 @@ public class Calculator {
                 executeComplexCalculation(op);  // faz o cálculo escolhido
             }
             formatLimit(operation);  // o método limpa a string que é exibida no 2º display, caso ultrapasse o tamanho do próprio display, exibindo apenas o último resultado
-            focus();  // faz o foco do cursor ficar em cima do display principal
         }
+        focus();  // faz o foco do cursor ficar em cima do display principal
     }
 
     // método que faz a operação aritmética da opção anterior do usuário
@@ -550,6 +552,16 @@ public class Calculator {
         }
     }
 
+    // se o tamanho da string do 1º display ultrapassar 20 algarismos, os botões númericos serão bloqueados
+    public boolean formatMaxSize() {
+        boolean maxsize = false;
+        int size = start.inputText.getText().length();
+        if (size >= 20) {
+            maxsize = true;
+        }
+        return maxsize;
+    }
+
     // método formata a string do 2º display, apagando toda a string, caso atinge o 
     // tamanho limite do jLabel, substituindo toda a expressão anterior por apenas o resultado dela
     public void formatLimit(int operation) {
@@ -828,28 +840,32 @@ public class Calculator {
             }
         }
     }
+
     // método coloca o sinal de negativo no número, e o retira, se o usuário clicar no botão novamente
     public void negativeNumber() {
         if (!start.inputText.getText().isEmpty()) {
-            String input = "";  // String input = start.inputText.getText();
-            String signal = "";
-            if (Double.valueOf(start.inputText.getText()) == 0) {
-                // Se a entrada do usuário for igual a 0, o método não colocará o signal de -
-            } else {
-                if (!start.inputText.getText().contains("-")) {
-                    start.inputText.setText("-" + start.inputText.getText());
-                    signal = mathExpression + "(" + start.inputText.getText() + ")";
+            boolean maxsize = formatMaxSize();
+            if (maxsize == false) {
+                String input = "";  // String input = start.inputText.getText();
+                String signal = "";
+                if (Double.valueOf(start.inputText.getText()) == 0) {
+                    // Se a entrada do usuário for igual a 0, o método não colocará o signal de -
                 } else {
-                    input = start.inputText.getText();
-                    StringBuilder str = new StringBuilder(input);
-                    input = String.valueOf(str.delete(0, 1));
-                    start.inputText.setText(input);
-                    signal = mathExpression + input;
+                    if (!start.inputText.getText().contains("-")) {
+                        start.inputText.setText("-" + start.inputText.getText());
+                        signal = mathExpression + "(" + start.inputText.getText() + ")";
+                    } else {
+                        input = start.inputText.getText();
+                        StringBuilder str = new StringBuilder(input);
+                        input = String.valueOf(str.delete(0, 1));
+                        start.inputText.setText(input);
+                        signal = mathExpression + input;
+                    }
+                    start.labelExp.setText(signal);
+                    firstOpTyped = false;
+                    secondOpTyped = false;
+                    numpadTyped = true;
                 }
-                start.labelExp.setText(signal);
-                firstOpTyped = false;
-                secondOpTyped = false;
-                numpadTyped = true;
             }
         }
         focus();
@@ -879,17 +895,20 @@ public class Calculator {
     public void b0Action() {
         validateNumber();
         pressedOpButton();
-        if (!start.inputText.getText().equals("0")) {
-            start.inputText.setText(start.inputText.getText() + "0");
-            boolean check = formatNegativeNumberDynamically();
-            if (check == false) { // se o número não for negativo
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) { // se o numero nao ultrapassou 20 caracteres
+            if (!start.inputText.getText().equals("0")) {
+                start.inputText.setText(start.inputText.getText() + "0");
+                boolean check = formatNegativeNumberDynamically();
+                if (check == false) { // se o número não for negativo
+                    start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                }
+                numpadTyped = true;
+            } else if (start.inputText.getText().equals("0")) { // se o número escolhido for 0, então ele é impresso no 2º display
                 start.labelExp.setText(mathExpression + " " + start.inputText.getText());
             }
-            numpadTyped = true;
-            focus();
-        } else if (start.inputText.getText().equals("0")) { // se o número escolhido for 0, então ele é impresso no 2º display
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
         }
+        focus();
     }
 
     // // método do botão 1
@@ -897,12 +916,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "1");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "1");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -911,12 +933,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "2");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "2");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -925,12 +950,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "3");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "3");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -939,12 +967,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "4");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "4");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -953,12 +984,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "5");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "5");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -967,12 +1001,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "6");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "6");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -981,12 +1018,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "7");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "7");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -995,12 +1035,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "8");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "8");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -1009,12 +1052,15 @@ public class Calculator {
         validateNumber();
         replaceZero();
         pressedOpButton();
-        start.inputText.setText(start.inputText.getText() + "9");
-        boolean check = formatNegativeNumberDynamically();
-        if (check == false) {
-            start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            start.inputText.setText(start.inputText.getText() + "9");
+            boolean check = formatNegativeNumberDynamically();
+            if (check == false) {
+                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            }
+            numpadTyped = true;
         }
-        numpadTyped = true;
         focus();
     }
 
@@ -1053,22 +1099,25 @@ public class Calculator {
                         start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
                     }
                 }
-                focus();
             }
         }
+        focus();
     }
 
     // método imprime o . no número, para os números se tornarem decimais
     public void bFloatAction() {
         boolean check = validateNumber();
-        if (!start.inputText.getText().contains(".") && check == true) {
-            start.inputText.setText(start.inputText.getText() + ".");
-            firstOpTyped = false;
-            secondOpTyped = false;
-            numpadTyped = true;
-            boolean checagem = formatNegativeNumberDynamically();
-            if (checagem == false) { // se não é número negativo
-                start.labelExp.setText(mathExpression + "" + start.inputText.getText());
+        boolean maxsize = formatMaxSize();
+        if (maxsize == false) {
+            if (!start.inputText.getText().contains(".") && check == true) {
+                start.inputText.setText(start.inputText.getText() + ".");
+                firstOpTyped = false;
+                secondOpTyped = false;
+                numpadTyped = true;
+                boolean checagem = formatNegativeNumberDynamically();
+                if (checagem == false) { // se não é número negativo
+                    start.labelExp.setText(mathExpression + "" + start.inputText.getText());
+                }
             }
         }
         focus();

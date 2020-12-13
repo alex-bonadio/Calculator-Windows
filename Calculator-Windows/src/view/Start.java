@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Code Lines: 1714 Classe: 579 Methods: 79
+ * @author Alex Bonadio Code Lines: 1368 Classe: 596 Methods: 79
  */
 public class Start extends javax.swing.JFrame {
 
