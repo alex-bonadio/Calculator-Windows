@@ -4,7 +4,7 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 2011 Classe: 1412 Methods: 78
+ * @author Alex Bonadio Total Code Lines: 2016 Classe: 1417 Methods: 79
  */
 public class Calculator {
 
@@ -18,7 +18,7 @@ public class Calculator {
     private boolean firstOpTyped = false;    // muda para true quando o usuário clicar a 1º vez em um dos botões de operações aritiméticas
     private boolean secondOpTyped = false;   // muda para true quando o usuário clicar a 2º vez em um dos botões de operações aritiméticas
     private String mathExpression = "";      // é a string que armazena o que o usuário está fazendo na calculadora, para exibir no JLabel abaixo do Display principal
-    private CalculatorGUI calcGUI;                     // é uma cópia da variável de referência do objeto da Classe CalculatorGUI para manipular os componentes gráficos da Calculadora
+    private CalculatorGUI calcGUI;           // é uma cópia da variável de referência do objeto da Classe CalculatorGUI para manipular os componentes gráficos da Calculadora
 
     public Calculator() {
     }
@@ -850,6 +850,10 @@ public class Calculator {
                     || operation == 9 || operation == 10) {
                 maxNumber(number);
                 switch (operation) {
+                    case 0:
+                        accOperation = 11; // é salvo na memória como 11 uma operação inicial de porcentagem, ex: (150 % = 1.50)
+                        equalsClick = 0; // é configurado a quantidade de cliques no mouse para 0 para ser possível utilizar o backspace após uma operação de porcentagem inicial, de número 11
+                        break;
                     case 1:
                         operation = 7;
                         break;
@@ -1171,7 +1175,8 @@ public class Calculator {
                     || operation == 3 || operation == 4
                     || operation == 5 || operation == 6) {
 
-                if (secondOpTyped == false && equalsClick == 0) {
+                if (secondOpTyped == false && equalsClick == 0 
+                        && !calcGUI.inputText.getText().contains("E")) {
                     String input = calcGUI.inputText.getText();      // salva a entrada do usuário em input
                     StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
                     input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
@@ -1188,8 +1193,8 @@ public class Calculator {
                     }
                     if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
                         boolean checagem = formatDynamicallyNegativeNumber();
-                        if (checagem == false) { // se não é número negativo
-                            calcGUI.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+                        if (checagem == false && accOperation != 11) { // se não é um número negativo e não for uma operação de percentagem inicial, definida como 11, ex: (150 % = 1.50)
+                            calcGUI.labelExp.setText(mathExpression + input);  // então mostra a string no 2º display
                         }
                     }
                     if (numpadTyped == true && equalsClick == 1 && firstOpTyped == false) {
