@@ -1,10 +1,10 @@
 package controller;
 
-import view.Start;
+import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Code Lines: 1368 Classe: 1309 Methods: 78
+ * @author Alex Bonadio Total Code Lines: 2011 Classe: 1412 Methods: 78
  */
 public class Calculator {
 
@@ -18,28 +18,28 @@ public class Calculator {
     private boolean firstOpTyped = false;    // muda para true quando o usuário clicar a 1º vez em um dos botões de operações aritiméticas
     private boolean secondOpTyped = false;   // muda para true quando o usuário clicar a 2º vez em um dos botões de operações aritiméticas
     private String mathExpression = "";      // é a string que armazena o que o usuário está fazendo na calculadora, para exibir no JLabel abaixo do Display principal
-    private Start start;                     // é uma cópia da variável de referência do objeto da Classe Start para manipular os componentes gráficos da Calculadora
+    private CalculatorGUI calcGUI;                     // é uma cópia da variável de referência do objeto da Classe CalculatorGUI para manipular os componentes gráficos da Calculadora
 
     public Calculator() {
     }
 
-    // método recebe a cópia da variável de referência do objeto start instanciado na classe Start
-    public void sendReferenceVariable(Start start) {
-        this.start = start;  // salva a variável de referência e a torna global
+    // método recebe a cópia da variável de referência do objeto calcGUI instanciado na classe CalculatorGUI
+    public void sendReferenceVariable(CalculatorGUI calcGUI) {
+        this.calcGUI = calcGUI;  // salva a variável de referência e a torna global
     }
 
     // método valida a entrada do usuário, permitindo apenas números e o char E do euler 
     public boolean validateNumber() {
         boolean check = true;  // se a entrada está correta, ou seja, possui apenas números ou o E, então é true
-        if (!start.inputText.getText().isEmpty()) {
-            if (start.inputText.getText().contains("Impossible")
-                    || start.inputText.getText().contains("Exceeded")) {
+        if (!calcGUI.inputText.getText().isEmpty()) {
+            if (calcGUI.inputText.getText().contains("Impossible")
+                    || calcGUI.inputText.getText().contains("Exceeded")) {
                 cleanVariables(2);  // Se no 1º Display (Principal) tiver as palavras Impossible ou Exceed 
                 cleanVariables(3); // então várias variáveis são apagadas e reinicializadas
                 writeZero();      // depois de apagá-las é impresso 0 no Display Principal 
                 check = false;  // false significa que não passou no teste, tem caracteres inválidos
             } else {
-                // start.inputText.getText().matches("^[-0.0-9.0]*$");
+                // calcGUI.inputText.getText().matches("^[-0.0-9.0]*$");
                 check = true;  // true significa que passou na validação, não tem caracteres inválidos
             }
         }
@@ -51,10 +51,10 @@ public class Calculator {
         switch (level) {
             case 1:
                 mathExpression = ""; // apaga a mensagem que é exibida no 2º display
-                start.labelExp.setText(""); // apaga o 2º display
+                calcGUI.labelExp.setText(""); // apaga o 2º display
                 break;
             case 2: // apaga váriaveis e reseta valores de outras
-                start.labelExp.setText("");
+                calcGUI.labelExp.setText("");
                 mathExpression = "";
                 number = 0;
                 operation = 0;
@@ -66,7 +66,7 @@ public class Calculator {
                 focus();
                 break;
             case 3:
-                start.inputText.setText("");
+                calcGUI.inputText.setText("");
                 focus();
                 break;
             case 4:
@@ -135,10 +135,10 @@ public class Calculator {
                             accSub();   // função acumuladora de Subtração da Calculadora 
                             break;
                         case 3:
-                            accMult();
+                            accMult(); // função acumuladora de Multiplicação da Calculadora 
                             break;
                         case 4:
-                            accDiv();
+                            accDiv();  // função acumuladora de Divisão da Calculadora 
                             break;
                         case 5:
                             accPow(); // função acumuladora de potenciação
@@ -148,9 +148,9 @@ public class Calculator {
                     }
                 }
                 cleanVariables(2);     // apaga váriaveis e reseta valores de outras
-                firstOpTyped = true;  // mantém registrado que o usuário clicou uma vez em algo botão de Operação Aritmética 
-                numpadTyped = true;  // mantém registrado que o usuário clicou em algum algarismo
-                equalsClick = 1;    // registra que o usuário clicou 1 vez no botão de igual
+                firstOpTyped = true;  //  configura a variável para true para que o resultado do cálculo possa ser aproveitado para mais um novo cálculo 
+                numpadTyped = true;  //   configura a variável para true para que o resultado do cálculo possa ser aproveitado para mais um novo cálculo 
+                equalsClick = 1;    //    registra que o usuário clicou 1 vez no botão de igual
             }
         }
         focus();
@@ -171,7 +171,7 @@ public class Calculator {
 
                 System.out.println("[1º IF] Se a operação anterior " + operation + " é != ");
                 System.out.println("[1º IF] da operação atual [op: " + op + "]");
-                System.out.println("[1º IF] Ou se é a 1ª operação escolhida");
+                System.out.println("[1º IF] e não é a 1ª operação escolhida");
                 System.out.println("[1º IF] e já foi digitado um número: " + numpadTyped + "");
                 System.out.println("[1º IF] então foi chamado o método executeAnotherOperation(" + op + ")");
 
@@ -220,6 +220,7 @@ public class Calculator {
         equalsClick = 0;  // a contagem da quantidade de clicks em cima do = é configurado para 0
         numpadTyped = false;  // o registro do clique do mouse em cima do teclado numérico é configurado como falso
         firstOpTyped = true;  // o registro do clique do mouse em cima do botão de operação é configurado como verdadeiro
+        secondOpTyped = true;
 
         System.out.println("Configurou as variáveis");
         System.out.println("operation(" + operation + ") = op(" + op + ")");
@@ -228,6 +229,7 @@ public class Calculator {
         System.out.println("equalsClick(" + equalsClick + ")");
         System.out.println("numpadTyped(" + numpadTyped + ")");
         System.out.println("firstOpTyped(" + firstOpTyped + ")");
+        System.out.println("SecondOpTyped(" + secondOpTyped + ")");
     }
 
     // método faz a troca de sinal, quando o usuário decidir fazer outra operação aritmética
@@ -261,7 +263,7 @@ public class Calculator {
             }
         }
         mathExpression = new String(chars);
-        start.labelExp.setText(mathExpression);
+        calcGUI.labelExp.setText(mathExpression);
         equalsClick = 0;
         operation = op;
         accOperation = operation;
@@ -274,8 +276,8 @@ public class Calculator {
 
     // método que formata a expressão matemática no 2º display, trocando o sinal de operação nela
     public void formatAnotherOperation(short op) {
-        if (!start.inputText.getText().contains("Impossible")
-                && !start.inputText.getText().contains("Exceed")) {
+        if (!calcGUI.inputText.getText().contains("Impossible")
+                && !calcGUI.inputText.getText().contains("Exceed")) {
             switch (op) {
                 case 1:
                     mathExpression = mathExpression + " + ";  // string registra o que acontece para ser exibido no 2º display JLabel
@@ -296,7 +298,7 @@ public class Calculator {
                     mathExpression = mathExpression + " √ ";  // string registra o que acontece para ser exibido no 2º display JLabel
                     break;
             }
-            start.labelExp.setText(mathExpression);  // então a string é exibida no 2º display
+            calcGUI.labelExp.setText(mathExpression);  // então a string é exibida no 2º display
         }
     }
 
@@ -315,7 +317,7 @@ public class Calculator {
         System.out.println("equalsClick(" + equalsClick + ")");
 
         if (countOpClick == 0) {  // se o usuário clicou a primeira vez em um botão de operação aritmética         
-            number = Double.valueOf(start.inputText.getText()); // entao o número digitado é salvo em number
+            number = Double.valueOf(calcGUI.inputText.getText()); // entao o número digitado é salvo em number
             if (number < 0) {
                 formatNegativeNumber(op);
 
@@ -332,7 +334,7 @@ public class Calculator {
             System.out.println("[1º IF] numpadTyped " + numpadTyped);
 
         } else if (countOpClick == 1 && secondOpTyped == false) {  // se foi a 2º vez seguida que o usuário clicou no botão de operação, então ele está fazendo operações consecutivas, complexas
-            aux = Double.valueOf(start.inputText.getText());  // o 2º operando é salvo na memória RAM para fazer a acumulação
+            aux = Double.valueOf(calcGUI.inputText.getText());  // o 2º operando é salvo na memória RAM para fazer a acumulação
 
             System.out.println("[2º IF] Se o countOpClick = " + countOpClick);
             System.out.println("[2º IF] e o secondOpTyped = " + secondOpTyped + " então");
@@ -341,7 +343,7 @@ public class Calculator {
 
             calculationSwitch(op);
 
-            if (!start.inputText.getText().contains("Impossible") && !start.inputText.getText().contains("Exceed")) {
+            if (!calcGUI.inputText.getText().contains("Impossible") && !calcGUI.inputText.getText().contains("Exceed")) {
                 boolean check = maxNumber(number); // depois é checado se o valor calculado não excedeu o limite do double
                 if (check == true) { // senão excedeu o valor, então é feito a formatação do resultado para mostar nos displays
                     formatResult();  // formata o resultado final para exibir no Display
@@ -358,7 +360,7 @@ public class Calculator {
             System.out.println("[2º IF] firstOpTyped " + firstOpTyped);
 
         }
-        start.labelExp.setText(mathExpression); // depois de feitos os cálculos, o resultado formatado é exibido no 2º display
+        calcGUI.labelExp.setText(mathExpression); // depois de feitos os cálculos, o resultado formatado é exibido no 2º display
         countOpClick = 1;  // é registado que o usuário clicou 1 ou mais vezes em cima dos botões de operações aritméticas
 
         System.out.println("[Final do método]");
@@ -374,16 +376,16 @@ public class Calculator {
 
         switch (op) {
             case 1:
-                number = number + Double.valueOf(start.inputText.getText()); // então são feitas as adições complexas, sucessivas
+                number = number + Double.valueOf(calcGUI.inputText.getText()); // então são feitas as adições complexas, sucessivas
                 break;
             case 2:
-                number = number - Double.valueOf(start.inputText.getText()); // então são feitas as subtrações complexas, sucessivas
+                number = number - Double.valueOf(calcGUI.inputText.getText()); // então são feitas as subtrações complexas, sucessivas
                 break;
             case 3:
-                number = number * Double.valueOf(start.inputText.getText()); // então são feitas as multiplicações complexas, sucessivas
+                number = number * Double.valueOf(calcGUI.inputText.getText()); // então são feitas as multiplicações complexas, sucessivas
                 break;
             case 4:
-                double dividend = Double.valueOf(start.inputText.getText());
+                double dividend = Double.valueOf(calcGUI.inputText.getText());
                 if (dividend != 0) {
                     number = number / dividend;
                 } else {
@@ -391,10 +393,10 @@ public class Calculator {
                 }
                 break;
             case 5:
-                number = (double) Math.pow(number, Double.valueOf(start.inputText.getText()));
+                number = (double) Math.pow(number, Double.valueOf(calcGUI.inputText.getText()));
                 break;
             case 6:
-                double num = Double.valueOf(start.inputText.getText());
+                double num = Double.valueOf(calcGUI.inputText.getText());
                 number = Math.pow(num, 1 / number);
                 break;
         }
@@ -402,7 +404,7 @@ public class Calculator {
 
     // caso o número seja dividido por zero, aparecerá a mensagem no 1º Display
     public void formatImpossibleToDivideBy0() {
-        start.inputText.setText("Impossible to Divide by 0");
+        calcGUI.inputText.setText("Impossible to Divide by 0");
         cleanVariables(2);
         cleanVariables(4);
     }
@@ -413,20 +415,20 @@ public class Calculator {
         if (number == Math.floor(number) && number < 0) {
             long numInt = (long) number;
             mathExpression = mathExpression + " = (" + numInt + ") ";
-            start.inputText.setText(String.valueOf(numInt));
+            calcGUI.inputText.setText(String.valueOf(numInt));
 
         } else if (number == Math.floor(number) && number >= 0) {
             long numInt = (long) number;
             mathExpression = mathExpression + " = " + numInt;
-            start.inputText.setText(String.valueOf(numInt));
+            calcGUI.inputText.setText(String.valueOf(numInt));
 
         } else if (number > Math.floor(number) && number < 0) {
             mathExpression = mathExpression + " = (" + number + ") ";
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
 
         } else if (number > Math.floor(number) && number >= 0) {
             mathExpression = mathExpression + " = " + number;
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
         }
     }
 
@@ -435,9 +437,9 @@ public class Calculator {
     public void formatAcc() {
         if (number == Math.floor(number)) {
             long numInt = (long) number;
-            start.inputText.setText(String.valueOf(numInt));
+            calcGUI.inputText.setText(String.valueOf(numInt));
         } else {
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
         }
     }
 
@@ -459,9 +461,9 @@ public class Calculator {
 
         if (numPerc == Math.floor(numPerc)) {
             long numInt = (long) numPerc;
-            start.inputText.setText(String.valueOf(numInt));
+            calcGUI.inputText.setText(String.valueOf(numInt));
         } else {
-            start.inputText.setText(String.valueOf(numPerc));
+            calcGUI.inputText.setText(String.valueOf(numPerc));
         }
     }
 
@@ -485,33 +487,33 @@ public class Calculator {
         if (number == Math.floor(number) && number < 0) {
             long numInt = (long) number;
             mathExpression = mathExpression + " = (" + numInt + ") " + signal;
-            start.inputText.setText(String.valueOf(numInt));
+            calcGUI.inputText.setText(String.valueOf(numInt));
 
         } else if (number == Math.floor(number) && number >= 0) {
             long numInt = (long) number;
             mathExpression = mathExpression + " = " + numInt + "" + signal;
-            start.inputText.setText(String.valueOf(numInt));
+            calcGUI.inputText.setText(String.valueOf(numInt));
 
         } else if (number > Math.floor(number) && number < 0) {
             mathExpression = mathExpression + " = (" + number + ") " + signal;
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
 
         } else if (number > Math.floor(number) && number >= 0) {
 
             mathExpression = mathExpression + " = " + number + "" + signal;
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
         }
     }
 
     // se o resultado da operação aritmética gerar um número negativo
     // o método o imprimirá entre parênteses no 2º display
     public void formatResult() {
-        if (Double.valueOf(start.inputText.getText()) < 0) {
-            mathExpression = mathExpression + "(" + start.inputText.getText() + ") ";
-        } else if (Double.valueOf(start.inputText.getText()) == 0) {
+        if (Double.valueOf(calcGUI.inputText.getText()) < 0) {
+            mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") ";
+        } else if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
             mathExpression = mathExpression + "0";
-        } else if (Double.valueOf(start.inputText.getText()) > 0) {
-            mathExpression = mathExpression + start.inputText.getText();
+        } else if (Double.valueOf(calcGUI.inputText.getText()) > 0) {
+            mathExpression = mathExpression + calcGUI.inputText.getText();
         }
     }
     // método coloca dinamicamente em parênteses um número negativo, enquanto 
@@ -519,10 +521,10 @@ public class Calculator {
 
     public boolean formatDynamicallyNegativeNumber() {
         boolean check = false;
-        if (!start.inputText.getText().isEmpty()) {
-            if (Double.valueOf(start.inputText.getText()) < 0 || start.inputText.getText().contains("-")) {
+        if (!calcGUI.inputText.getText().isEmpty()) {
+            if (Double.valueOf(calcGUI.inputText.getText()) < 0 || calcGUI.inputText.getText().contains("-")) {
                 // Se número for menor que 0, o método colocará () ao redor do número negativo
-                start.labelExp.setText(mathExpression + "(" + start.inputText.getText() + ")");
+                calcGUI.labelExp.setText(mathExpression + "(" + calcGUI.inputText.getText() + ")");
                 check = true;
             }
         }
@@ -534,22 +536,22 @@ public class Calculator {
     public void formatNegativeNumber(short op) {
         switch (op) {
             case 1:
-                mathExpression = mathExpression + "(" + start.inputText.getText() + ") + ";
+                mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") + ";
                 break;
             case 2:
-                mathExpression = mathExpression + "(" + start.inputText.getText() + ") - ";
+                mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") - ";
                 break;
             case 3:
-                mathExpression = mathExpression + "(" + start.inputText.getText() + ") x ";
+                mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") x ";
                 break;
             case 4:
-                mathExpression = mathExpression + "(" + start.inputText.getText() + ") / ";
+                mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") / ";
                 break;
             case 5:
-                mathExpression = mathExpression + "(" + start.inputText.getText() + ") ^ ";
+                mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") ^ ";
                 break;
             default:
-                mathExpression = mathExpression + "(" + start.inputText.getText() + ") √ ";
+                mathExpression = mathExpression + "(" + calcGUI.inputText.getText() + ") √ ";
                 break;
         }
     }
@@ -559,22 +561,22 @@ public class Calculator {
     public void formatPositiveNumber(short op) {
         switch (op) {
             case 1:
-                mathExpression = mathExpression + start.inputText.getText() + " + ";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + " + ";
                 break;
             case 2:
-                mathExpression = mathExpression + start.inputText.getText() + " - ";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + " - ";
                 break;
             case 3:
-                mathExpression = mathExpression + start.inputText.getText() + " x ";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + " x ";
                 break;
             case 4:
-                mathExpression = mathExpression + start.inputText.getText() + " / ";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + " / ";
                 break;
             case 5:
-                mathExpression = mathExpression + start.inputText.getText() + " ^ ";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + " ^ ";
                 break;
             default:
-                mathExpression = mathExpression + start.inputText.getText() + " √ ";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + " √ ";
                 break;
         }
     }
@@ -632,7 +634,7 @@ public class Calculator {
 
     // método formata a string do 2º display quando for 0%
     public void formatZeroPercent() {
-        if (start.labelExp.getText().equals("[0% of 0 = 0]")) {
+        if (calcGUI.labelExp.getText().equals("[0% of 0 = 0]")) {
             cleanVariables(1);
         }
     }
@@ -640,8 +642,8 @@ public class Calculator {
     // se o tamanho da string do 1º display ultrapassar 20 algarismos, os botões númericos serão bloqueados
     public boolean formatMaxSize() {
         boolean maxsize = false;
-        int size = start.inputText.getText().length();
-        if (size >= 20) {
+        int size = calcGUI.inputText.getText().length();
+        if (size >= 19) {
             maxsize = true;
         }
         return maxsize;
@@ -649,8 +651,8 @@ public class Calculator {
 
     public void formatNegativeZero() {
 
-        if (Double.valueOf(start.inputText.getText()) == 0) {
-            start.inputText.setText("0");
+        if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
+            calcGUI.inputText.setText("0");
             mathExpression = "";
         }
     }
@@ -677,36 +679,36 @@ public class Calculator {
             if (operation >= 7) {
                 mathExpression = "";
                 mathExpression = number + " " + signal + " [" + aux + "% = ";
-                mathExpression = mathExpression + start.inputText.getText() + "]";
+                mathExpression = mathExpression + calcGUI.inputText.getText() + "]";
             } else {
                 if (number == Math.floor(number) && number < 0) {
                     long numInt = (long) number;
                     mathExpression = "(" + String.valueOf(numInt) + ") " + signal;
-                    start.inputText.setText(String.valueOf(numInt));
+                    calcGUI.inputText.setText(String.valueOf(numInt));
 
                 } else if (number == Math.floor(number) && number >= 0) {
                     long numInt = (long) number;
                     mathExpression = String.valueOf(numInt) + signal;
-                    start.inputText.setText(String.valueOf(numInt));
+                    calcGUI.inputText.setText(String.valueOf(numInt));
 
                 } else if (number > Math.floor(number) && number < 0) {
                     mathExpression = "(" + String.valueOf(number) + ") " + signal;
-                    start.inputText.setText(String.valueOf(number));
+                    calcGUI.inputText.setText(String.valueOf(number));
 
                 } else if (number > Math.floor(number) && number >= 0) {
                     mathExpression = String.valueOf(number) + signal;
-                    start.inputText.setText(String.valueOf(number));
+                    calcGUI.inputText.setText(String.valueOf(number));
                 }
             }
         }
-        start.labelExp.setText(mathExpression);
+        calcGUI.labelExp.setText(mathExpression);
         firstOpTyped = true;
     }
 
     // método faz os cálculos sucessivos de acumulação, da operação de Soma
     // quando o usuário ficar clicando sucessivamente no botão de igual
     public void accSum() {
-        number = Double.valueOf(start.inputText.getText());
+        number = Double.valueOf(calcGUI.inputText.getText());
         number = number + aux;
         boolean check = maxNumber(number);
         if (check == true) {
@@ -717,11 +719,11 @@ public class Calculator {
     // método faz a soma simples, ex: 2 + 2
     public void simpleSum() {
         formatResult();
-        aux = Double.valueOf(start.inputText.getText());
-        number = number + Double.valueOf(start.inputText.getText());
+        aux = Double.valueOf(calcGUI.inputText.getText());
+        number = number + Double.valueOf(calcGUI.inputText.getText());
         boolean check = maxNumber(number);
         if (check == true) {
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
             formatSimpleOp();
         }
     }
@@ -729,7 +731,7 @@ public class Calculator {
     // método faz os cálculos sucessivos de acumulação, da operação de subtração
     // quando o usuário ficar clicando sucessivamente no botão de igual
     public void accSub() {
-        number = Double.valueOf(start.inputText.getText());
+        number = Double.valueOf(calcGUI.inputText.getText());
         number = number - aux;
         boolean check = maxNumber(number);
         if (check == true) {
@@ -740,11 +742,11 @@ public class Calculator {
     // método faz a subtração simples, ex: 4-2
     public void simpleSub() {
         formatResult();
-        aux = Double.valueOf(start.inputText.getText());
-        number = number - Double.valueOf(start.inputText.getText());
+        aux = Double.valueOf(calcGUI.inputText.getText());
+        number = number - Double.valueOf(calcGUI.inputText.getText());
         boolean check = maxNumber(number);
         if (check == true) {
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
             formatSimpleOp();
         }
     }
@@ -752,7 +754,7 @@ public class Calculator {
     // método faz os cálculos sucessivos de acumulação, da operação de Multiplicação
     // quando o usuário ficar clicando sucessivamente no botão de igual
     public void accMult() {
-        number = Double.valueOf(start.inputText.getText());
+        number = Double.valueOf(calcGUI.inputText.getText());
         number = number * aux;
         boolean check = maxNumber(number);
         if (check == true) {
@@ -763,11 +765,11 @@ public class Calculator {
     // método faz a multiplicação simples, ex: 4*4
     public void simpleMult() {
         formatResult();
-        aux = Double.valueOf(start.inputText.getText());
-        number = number * Double.valueOf(start.inputText.getText());
+        aux = Double.valueOf(calcGUI.inputText.getText());
+        number = number * Double.valueOf(calcGUI.inputText.getText());
         boolean check = maxNumber(number);
         if (check == true) {
-            start.inputText.setText(String.valueOf(number));
+            calcGUI.inputText.setText(String.valueOf(number));
             formatSimpleOp();
         }
     }
@@ -775,8 +777,8 @@ public class Calculator {
     // método faz os cálculos sucessivos de acumulação, da operação de Divisão
     // quando o usuário ficar clicando sucessivamente no botão de igual
     public void accDiv() {
-        if (Double.valueOf(start.inputText.getText()) != 0) {
-            number = Double.valueOf(start.inputText.getText());
+        if (Double.valueOf(calcGUI.inputText.getText()) != 0) {
+            number = Double.valueOf(calcGUI.inputText.getText());
             number = number / aux;
             boolean check = maxNumber(number);
             if (check == true) {
@@ -790,13 +792,13 @@ public class Calculator {
     // método faz divisão simples, ex: 10/2 e se for uma divisão por zero, exibe
     // que é impossível dividir por zero
     public void simpleDiv() {
-        if (Double.valueOf(start.inputText.getText()) != 0) {
+        if (Double.valueOf(calcGUI.inputText.getText()) != 0) {
             formatResult();
-            aux = Double.valueOf(start.inputText.getText());
-            number = number / Double.valueOf(start.inputText.getText());
+            aux = Double.valueOf(calcGUI.inputText.getText());
+            number = number / Double.valueOf(calcGUI.inputText.getText());
             boolean check = maxNumber(number);
             if (check == true) {
-                start.inputText.setText(String.valueOf(number));
+                calcGUI.inputText.setText(String.valueOf(number));
                 formatSimpleOp();
             }
         } else {
@@ -807,7 +809,7 @@ public class Calculator {
     // método faz os cálculos sucessivos de acumulação, da operação de Potenciação
     // quando o usuário ficar clicando sucessivamente no botão de igual
     public void accPow() {
-        number = Double.valueOf(start.inputText.getText());
+        number = Double.valueOf(calcGUI.inputText.getText());
         number = Math.pow(number, aux);
         boolean check = maxNumber(number);
         if (check == true) {
@@ -818,8 +820,8 @@ public class Calculator {
     // método faz o calculo de potenciação simples, ex: 2^62 
     public void simplePow() {
         formatResult();
-        aux = Double.valueOf(start.inputText.getText());
-        number = (double) Math.pow(number, Double.valueOf(start.inputText.getText()));
+        aux = Double.valueOf(calcGUI.inputText.getText());
+        number = (double) Math.pow(number, Double.valueOf(calcGUI.inputText.getText()));
         boolean check = maxNumber(number);
         if (check == true) {
             formatSimpleOp();
@@ -829,8 +831,8 @@ public class Calculator {
     // método faz o calculo de raiz quadrada
     public void simpleRoot() {
         formatResult();
-        aux = Double.valueOf(start.inputText.getText());
-        number = Math.pow(Double.valueOf(start.inputText.getText()), 1 / number);
+        aux = Double.valueOf(calcGUI.inputText.getText());
+        number = Math.pow(Double.valueOf(calcGUI.inputText.getText()), 1 / number);
         boolean check = maxNumber(number);
         if (check == true) {
             formatSimpleOp();
@@ -865,17 +867,17 @@ public class Calculator {
                 }
                 formatPercentMultiCalculation();
                 if (operation == 0) {
-                    number = Double.valueOf(start.inputText.getText()) / 100;
+                    number = Double.valueOf(calcGUI.inputText.getText()) / 100;
                     formatPercent1Display(number);
                 } else {
-                    mathExpression = mathExpression + "[" + start.inputText.getText() + "% of " + formatPercent2Display(number) + " = ";
-                    double numPerc = (number / 100) * Double.valueOf(start.inputText.getText());
+                    mathExpression = mathExpression + "[" + calcGUI.inputText.getText() + "% of " + formatPercent2Display(number) + " = ";
+                    double numPerc = (number / 100) * Double.valueOf(calcGUI.inputText.getText());
                     aux = numPerc;
                     check = maxNumber(numPerc);
                     if (check == true) {
                         formatPercent1Display(numPerc);
-                        mathExpression = mathExpression + formatPercent2Display(Double.valueOf(start.inputText.getText())) + "]";
-                        start.labelExp.setText(mathExpression);
+                        mathExpression = mathExpression + formatPercent2Display(Double.valueOf(calcGUI.inputText.getText())) + "]";
+                        calcGUI.labelExp.setText(mathExpression);
                         formatLimit(7);
                     }
                 }
@@ -889,16 +891,16 @@ public class Calculator {
     public void percentCalc() {
         switch (operation) {
             case 7:
-                number = number + Double.valueOf(start.inputText.getText());
+                number = number + Double.valueOf(calcGUI.inputText.getText());
                 break;
             case 8:
-                number = number - Double.valueOf(start.inputText.getText());
+                number = number - Double.valueOf(calcGUI.inputText.getText());
                 break;
             case 9:
-                number = number * Double.valueOf(start.inputText.getText());
+                number = number * Double.valueOf(calcGUI.inputText.getText());
                 break;
             case 10:
-                double dividend = Double.valueOf(start.inputText.getText());
+                double dividend = Double.valueOf(calcGUI.inputText.getText());
                 if (dividend != 0) {
                     number = number / dividend;
                 } else {
@@ -908,53 +910,53 @@ public class Calculator {
             default:
                 break;
         }
-        if (!start.inputText.getText().contains("Impossible")) {
+        if (!calcGUI.inputText.getText().contains("Impossible")) {
             boolean check = maxNumber(number);
             if (check == true) {
                 formatAcc();
-                mathExpression = mathExpression + " = " + start.inputText.getText();
-                start.labelExp.setText(mathExpression);
+                mathExpression = mathExpression + " = " + calcGUI.inputText.getText();
+                calcGUI.labelExp.setText(mathExpression);
             }
         }
     }
 
     // método coloca o cursor no 1º display, caso ele seja desbloqueado para escrita direta
     public void focus() {
-        start.inputText.requestFocus();
+        calcGUI.inputText.requestFocus();
     }
 
     // método sobrepõe o zero por outro número no 1º display 
     public void replaceZero() {
-        if (!start.inputText.getText().isEmpty()) {
-            String input = start.inputText.getText();
-            int i = input.length() - 1;
-            if (i == 0 && input.charAt(0) == '0') {
-                start.inputText.setText("");
+        if (!calcGUI.inputText.getText().isEmpty()) {
+            String input = calcGUI.inputText.getText();
+            int i = input.length();
+            if (i == 1 && input.charAt(0) == '0') {
+                calcGUI.inputText.setText("");
             }
         }
     }
 
     // método coloca o sinal de negativo no número, e o retira, se o usuário clicar no botão novamente
     public void negativeNumber() {
-        if (!start.inputText.getText().isEmpty()) {
+        if (!calcGUI.inputText.getText().isEmpty()) {
             boolean maxsize = formatMaxSize();
             if (maxsize == false) {
-                String input = "";  // String input = start.inputText.getText();
+                String input = "";  // String input = calcGUI.inputText.getText();
                 String signal = "";
-                if (Double.valueOf(start.inputText.getText()) == 0) {
+                if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
                     // Se a entrada do usuário for igual a 0, o método não colocará o signal de -
                 } else {
-                    if (!start.inputText.getText().contains("-")) {
-                        start.inputText.setText("-" + start.inputText.getText());
-                        signal = mathExpression + "(" + start.inputText.getText() + ")";
+                    if (!calcGUI.inputText.getText().contains("-")) {
+                        calcGUI.inputText.setText("-" + calcGUI.inputText.getText());
+                        signal = mathExpression + "(" + calcGUI.inputText.getText() + ")";
                     } else {
-                        input = start.inputText.getText();
+                        input = calcGUI.inputText.getText();
                         StringBuilder str = new StringBuilder(input);
                         input = String.valueOf(str.delete(0, 1));
-                        start.inputText.setText(input);
+                        calcGUI.inputText.setText(input);
                         signal = mathExpression + input;
                     }
-                    start.labelExp.setText(signal);
+                    calcGUI.labelExp.setText(signal);
                     firstOpTyped = false;
                     secondOpTyped = false;
                     numpadTyped = true;
@@ -968,18 +970,22 @@ public class Calculator {
     // deu o primeiro ou segundo click nos botõe de operação
     public void pressedOpButton() {
         if (firstOpTyped == true) {  // se já deu o 1º clique no botão de operação
-            start.inputText.setText("");
+            calcGUI.inputText.setText(""); // apaga o 1º display
             firstOpTyped = false;    // então volta para FALSE;
         }
         if (secondOpTyped == true) { // se já deu o 2º clique no botão de operação
-            start.inputText.setText("");
+            calcGUI.inputText.setText(""); // apaga o 1º display
             secondOpTyped = false;   // então volta para FALSE;
+        }
+        if (equalsClick == 1) {      // se já clicou uma vez no botão de igual
+            calcGUI.inputText.setText(""); // apaga o 1º display
+            equalsClick = 0;        // e reseta o registro do clique do mouse para 0
         }
     }
 
     // método escreve 0 no display
     public void writeZero() {
-        start.inputText.setText("0");
+        calcGUI.inputText.setText("0");
         numpadTyped = true;
         focus();
     }
@@ -990,15 +996,15 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) { // se o numero nao ultrapassou 20 caracteres
-            if (!start.inputText.getText().equals("0")) {
-                start.inputText.setText(start.inputText.getText() + "0");
+            if (!calcGUI.inputText.getText().equals("0")) {
+                calcGUI.inputText.setText(calcGUI.inputText.getText() + "0");
                 boolean check = formatDynamicallyNegativeNumber();
                 if (check == false) { // se o número não for negativo
-                    start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                    calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
                 }
                 numpadTyped = true;
-            } else if (start.inputText.getText().equals("0")) { // se o número escolhido for 0, então ele é impresso no 2º display
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+            } else if (calcGUI.inputText.getText().equals("0")) { // se o número escolhido for 0, então ele é impresso no 2º display
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
         }
         focus();
@@ -1011,10 +1017,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) { // se não atingiu o número máximo, então é impresso o 1 no 1º Display
-            start.inputText.setText(start.inputText.getText() + "1");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "1");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1028,10 +1034,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "2");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "2");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1045,10 +1051,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "3");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "3");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1062,10 +1068,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "4");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "4");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1079,10 +1085,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "5");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "5");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1096,10 +1102,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "6");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "6");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1113,10 +1119,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "7");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "7");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1130,10 +1136,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "8");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "8");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1147,10 +1153,10 @@ public class Calculator {
         pressedOpButton();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            start.inputText.setText(start.inputText.getText() + "9");
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + "9");
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
-                start.labelExp.setText(mathExpression + " " + start.inputText.getText());
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
             }
             numpadTyped = true;
         }
@@ -1165,33 +1171,38 @@ public class Calculator {
                     || operation == 3 || operation == 4
                     || operation == 5 || operation == 6) {
 
-                String input = start.inputText.getText();      // salva a entrada do usuário em input
-                StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
-                input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
-                start.inputText.setText(input);               // exibe a string no display principal 
+                if (secondOpTyped == false && equalsClick == 0) {
+                    String input = calcGUI.inputText.getText();      // salva a entrada do usuário em input
+                    StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
+                    input = String.valueOf(str.deleteCharAt(input.length() - 1));  // deleta da última posição até a 1º
+                    calcGUI.inputText.setText(input);               // exibe a string no display principal 
 
-                if (start.inputText.getText().equals("-0")) {
-                    input = "";    // não a deixa nula e apaga o -(número negativo)
-                    writeZero();   // depois imprime o zero
-                }
-
-                if (input.length() == 0 || start.inputText.getText().equals("-")) {  // se o tamanho da string for 0 ou se o número for negativo
-                    input = "";    // não a deixa nula e apaga o -(número negativo)
-                    writeZero();   // depois imprime o zero
-                }
-                if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
-                    boolean checagem = formatDynamicallyNegativeNumber();
-                    if (checagem == false) { // se não é número negativo
-                        start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+                    if (calcGUI.inputText.getText().equals("-0")) {
+                        input = "";    // não a deixa nula e apaga o -(número negativo)
+                        writeZero();   // depois imprime o zero
                     }
-                }
-                if (numpadTyped == true && equalsClick == 1 && firstOpTyped == false) {
-                    boolean checagem = formatDynamicallyNegativeNumber();
-                    if (checagem == false) { // se não é número negativo
-                        start.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+
+                    if (input.length() == 0 || calcGUI.inputText.getText().equals("-")) {  // se o tamanho da string for 0 ou se o número for negativo
+                        input = "";    // não a deixa nula e apaga o -(número negativo)
+                        writeZero();   // depois imprime o zero
+                    }
+                    if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
+                        boolean checagem = formatDynamicallyNegativeNumber();
+                        if (checagem == false) { // se não é número negativo
+                            calcGUI.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+                        }
+                    }
+                    if (numpadTyped == true && equalsClick == 1 && firstOpTyped == false) {
+                        boolean checagem = formatDynamicallyNegativeNumber();
+                        if (checagem == false) { // se não é número negativo
+                            calcGUI.labelExp.setText(mathExpression + input);  // mostra a string no 2º display
+                        }
                     }
                 }
             }
+        }
+        if (equalsClick == 0) {
+            firstOpTyped = false;
         }
         focus();
     }
@@ -1201,14 +1212,14 @@ public class Calculator {
         boolean check = validateNumber();
         boolean maxsize = formatMaxSize();
         if (maxsize == false) {
-            if (!start.inputText.getText().contains(".") && check == true) {
-                start.inputText.setText(start.inputText.getText() + ".");
+            if (!calcGUI.inputText.getText().contains(".") && check == true) {
+                calcGUI.inputText.setText(calcGUI.inputText.getText() + ".");
                 firstOpTyped = false;
                 secondOpTyped = false;
                 numpadTyped = true;
                 boolean checagem = formatDynamicallyNegativeNumber();
                 if (checagem == false) { // se não é número negativo
-                    start.labelExp.setText(mathExpression + "" + start.inputText.getText());
+                    calcGUI.labelExp.setText(mathExpression + "" + calcGUI.inputText.getText());
                 }
             }
         }
@@ -1217,11 +1228,11 @@ public class Calculator {
 
     // método do botão CE, apaga o último número digitado
     public void bCleanNumAction() {
-        String input = start.inputText.getText();
+        String input = calcGUI.inputText.getText();
         StringBuilder str = new StringBuilder(input);
         input = String.valueOf(str.delete(0, str.length()));
-        start.inputText.setText(input);
-        start.labelExp.setText(mathExpression + input);
+        calcGUI.inputText.setText(input);
+        calcGUI.labelExp.setText(mathExpression + input);
         writeZero(); // depois de apagar, escreve zero no display principal
     }
 
@@ -1307,10 +1318,10 @@ public class Calculator {
         boolean check = true;
         double max = Math.pow(2, 63);
         if (num >= max || num <= -max // se o número chegou ao limite da calculadora
-                || Double.valueOf(start.inputText.getText()) >= max
-                || Double.valueOf(start.inputText.getText()) <= -max) {
-            start.inputText.setText("Calculation Exceeded"); // então exibe Cálculo Excedido
-            //        start.labelExp.setText(mathExpression);
+                || Double.valueOf(calcGUI.inputText.getText()) >= max
+                || Double.valueOf(calcGUI.inputText.getText()) <= -max) {
+            calcGUI.inputText.setText("Calculation Exceeded"); // então exibe Cálculo Excedido
+            //        calcGUI.labelExp.setText(mathExpression);
             cleanVariables(2); // apaga as variaveis, se excedeu o número máximo
             cleanVariables(4);
             check = false;

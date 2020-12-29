@@ -3,13 +3,13 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Code Lines: 1368 Classe: 596 Methods: 79
+ * @author Alex Bonadio Total Code Lines: 2011 Classe: 599 Methods: 78
  */
-public class Start extends javax.swing.JFrame {
+public class CalculatorGUI extends javax.swing.JFrame {
 
     Calculator calc = new Calculator();
 
-    public Start() {
+    public CalculatorGUI() {
         initComponents();
     }
 
@@ -50,7 +50,7 @@ public class Start extends javax.swing.JFrame {
 
         inputText.setEditable(false);
         inputText.setBackground(new java.awt.Color(255, 255, 255));
-        inputText.setFont(new java.awt.Font("Arial", 0, 28)); // NOI18N
+        inputText.setFont(new java.awt.Font("Arial", 0, 30)); // NOI18N
         inputText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         inputText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 51, 255)));
         inputText.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -59,7 +59,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b7.setText("7");
         b7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +67,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b8.setText("8");
         b8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +84,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b4.setText("4");
         b4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b5.setText("5");
         b5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +100,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b6.setText("6");
         b6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bMult.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bMult.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bMult.setForeground(new java.awt.Color(255, 255, 0));
         bMult.setMnemonic('*');
         bMult.setText("x");
@@ -120,7 +120,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b2.setText("2");
         b2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +128,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bDiv.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bDiv.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bDiv.setForeground(new java.awt.Color(0, 153, 153));
         bDiv.setText("/");
         bDiv.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +137,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b1.setText("1");
         b1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,7 +145,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b3.setText("3");
         b3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +153,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b0.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b0.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b0.setText("0");
         b0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +161,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bEqual.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bEqual.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bEqual.setForeground(new java.awt.Color(255, 51, 51));
         bEqual.setText("=");
         bEqual.setToolTipText("");
@@ -171,7 +171,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bFloat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bFloat.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         bFloat.setText(".");
         bFloat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +179,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bCleanner.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bCleanner.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         bCleanner.setForeground(new java.awt.Color(255, 0, 0));
         bCleanner.setText("C");
         bCleanner.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +198,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bSub.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bSub.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bSub.setForeground(new java.awt.Color(51, 0, 204));
         bSub.setText("-");
         bSub.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +219,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bSum.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bSum.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         bSum.setForeground(new java.awt.Color(0, 102, 255));
         bSum.setMnemonic('-');
         bSum.setText("+");
@@ -229,7 +229,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        bCleanNum.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bCleanNum.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         bCleanNum.setForeground(new java.awt.Color(255, 0, 0));
         bCleanNum.setText("CE");
         bCleanNum.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +257,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
-        b9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b9.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         b9.setText("9");
         b9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,25 +277,24 @@ public class Start extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelExp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(bCleanner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(bCleanNum, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(b1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(b7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(bMaisMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(b2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(b8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(b5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(b0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(bPerc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(bCleanner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(bCleanNum, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(b1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(b7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bMaisMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(b2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(b8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(b5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(b0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(bPerc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -529,34 +528,38 @@ public class Start extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Start.class
+            java.util.logging.Logger.getLogger(CalculatorGUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Start.class
+            java.util.logging.Logger.getLogger(CalculatorGUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Start.class
+            java.util.logging.Logger.getLogger(CalculatorGUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Start.class
+            java.util.logging.Logger.getLogger(CalculatorGUI.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        Start start = new Start();
-        start.getReferenceVariable(start);
+        CalculatorGUI calcGUI = new CalculatorGUI();
+        calcGUI.getReferenceVariable(calcGUI);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //  new Calculator().setVisible(true);
-                start.setVisible(true);
+                calcGUI.setVisible(true);
             }
         });
     }
@@ -589,7 +592,7 @@ public class Start extends javax.swing.JFrame {
     public javax.swing.JLabel labelExp;
     // End of variables declaration//GEN-END:variables
 
-    public void getReferenceVariable(Start start) {
+    public void getReferenceVariable(CalculatorGUI start) {
         calc.sendReferenceVariable(start);
         calc.writeZero();
     }
