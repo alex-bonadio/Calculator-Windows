@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Total Code Lines: 2016 Classe: 575 Methods: 27
+ * @author Alex Bonadio Total Code Lines: 1845 Classe: 575 Methods: 27
  */
 public class CalculatorGUI extends javax.swing.JFrame {
 

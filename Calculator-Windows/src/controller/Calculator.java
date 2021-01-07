@@ -238,7 +238,7 @@ public class Calculator {
         System.out.println("\nexecuteSignalChange(" + op + ")");
 
         char chars[] = null;
-        int i = mathExpression.length() - 1;
+        int i = mathExpression.length() -1;
         if (i > 0) {
             chars = mathExpression.toCharArray();
             switch (op) {
@@ -322,7 +322,7 @@ public class Calculator {
                 formatNegativeNumber(op);
 
             } else if (number >= 0) {
-                formatNegativeZero();
+                formatZero();
                 formatPositiveNumber(op);
             }
             firstOpTyped = true;  // é registado que o usuário clicou a 1º vez no botão de operação
@@ -372,7 +372,7 @@ public class Calculator {
     public void calculationSwitch(short op) {
 
         System.out.println("\ncalculationSwitch(" + op + ")");
-        System.out.println("Realizaou o Cálculo: (" + op + ")");
+        System.out.println("Realizou o Cálculo: (" + op + ")");
 
         switch (op) {
             case 1:
@@ -649,7 +649,7 @@ public class Calculator {
         return maxsize;
     }
 
-    public void formatNegativeZero() {
+    public void formatZero() {
 
         if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
             calcGUI.inputText.setText("0");
@@ -675,7 +675,7 @@ public class Calculator {
             signal = " √ ";
         }
         int size = mathExpression.length();
-        if (size >= 40) { // tamanho maximo permitido na string, 40 posições
+        if (size >= 40) { // tamanho máximo permitido na string, 40 posições
             if (operation >= 7) {
                 mathExpression = "";
                 mathExpression = number + " " + signal + " [" + aux + "% = ";
@@ -851,26 +851,26 @@ public class Calculator {
                 maxNumber(number);
                 switch (operation) {
                     case 0:
-                        accOperation = 11; // é salvo na memória como 11 uma operação inicial de porcentagem, ex: (150 % = 1.50)
-                        equalsClick = 0; // é configurado a quantidade de cliques no mouse para 0 para ser possível utilizar o backspace após uma operação de porcentagem inicial, de número 11
+                        accOperation = 11; // é salvo na memória como 11 uma operação inicial de porcentagem, ex: (150 % = 1.50), sem as operações básicas (+ - * /)
+                        equalsClick = 0;  //  configurado a quantidade de cliques no botão de igual para 0, para ser possível utilizar o backspace após uma operação de porcentagem inicial, de número 11
                         break;
-                    case 1:
-                        operation = 7;
+                    case 1:             // adição sem porcentagem
+                        operation = 7; // se tornará a adição usada juntamente com a porcentagem
                         break;
-                    case 2:
+                    case 2:            // subtração 
                         operation = 8;
                         break;
-                    case 3:
+                    case 3:           // multiplicação
                         operation = 9;
                         break;
-                    case 4:
+                    case 4:          // divisão
                         operation = 10;
                         break;
                     default:
                         break;
                 }
-                formatPercentMultiCalculation();
-                if (operation == 0) {
+                formatPercentMultiCalculation(); // formata a expressão matemática com porcentagem impressa no 2º display
+                if (operation == 0) {  // se não foi escolhido nenhuma operação, então o usuário digitou um número e depois clicou no botão de porcentagem, assim o número será dividido por 100
                     number = Double.valueOf(calcGUI.inputText.getText()) / 100;
                     formatPercent1Display(number);
                 } else {
@@ -891,7 +891,7 @@ public class Calculator {
     }
 
     // método faz os cálculos de porcentagem misturados com as operações aritméticas básicas
-    // e chama os métodos de formatação do resultado no 2º display
+    // e chama os métodos de formatação do resultado para apresentá-lo no 2º display
     public void percentCalc() {
         switch (operation) {
             case 7:
@@ -924,7 +924,7 @@ public class Calculator {
         }
     }
 
-    // método coloca o cursor no 1º display, caso ele seja desbloqueado para escrita direta
+    // método coloca o cursor no 1º display, caso ele seja desbloqueado para escrita direta, que atualmente não é, a caixa de texto está bloqueada para escrita
     public void focus() {
         calcGUI.inputText.requestFocus();
     }
@@ -999,7 +999,7 @@ public class Calculator {
         validateNumber();
         pressedOpButton();
         boolean maxsize = formatMaxSize();
-        if (maxsize == false) { // se o numero nao ultrapassou 19 caracteres
+        if (maxsize == false) { // se o número nao ultrapassou 19 caracteres
             if (!calcGUI.inputText.getText().equals("0")) {
                 calcGUI.inputText.setText(calcGUI.inputText.getText() + "0");
                 boolean check = formatDynamicallyNegativeNumber();
@@ -1057,7 +1057,7 @@ public class Calculator {
                     }
                     if (numpadTyped == true && equalsClick == 0) {          // se já foi digitado algum número  
                         boolean checagem = formatDynamicallyNegativeNumber();
-                        if (checagem == false && accOperation != 11) { // se não é um número negativo e não for uma operação de percentagem inicial, definida como 11, ex: (150 % = 1.50)
+                        if (checagem == false && accOperation != 11) { // se não é um número negativo e não for uma operação de porcentagem inicial, definida como 11, ex: (150 % = 1.50)
                             calcGUI.labelExp.setText(mathExpression + input);  // então mostra a string no 2º display
                         }
                     }
