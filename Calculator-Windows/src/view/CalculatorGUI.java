@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Total Code Lines: 2016 Classe: 599 Methods: 27
+ * @author Alex Bonadio Total Code Lines: 2016 Classe: 575 Methods: 27
  */
 public class CalculatorGUI extends javax.swing.JFrame {
 
@@ -387,62 +387,50 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void b0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b0ActionPerformed
-        // TODO add your handling code here:
         calc.b0Action();
     }//GEN-LAST:event_b0ActionPerformed
 
     private void b3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b3ActionPerformed
-        // TODO add your handling code here:
-        calc.b3Action();
+        calc.numPadAction(3);
     }//GEN-LAST:event_b3ActionPerformed
 
     private void b2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b2ActionPerformed
-        // TODO add your handling code here:
-        calc.b2Action();
+        calc.numPadAction(2);
     }//GEN-LAST:event_b2ActionPerformed
 
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
-        // TODO add your handling code here:
-        calc.b1Action();
+        calc.numPadAction(1);
     }//GEN-LAST:event_b1ActionPerformed
 
     private void b4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b4ActionPerformed
-        // TODO add your handling code here:
-        calc.b4Action();
+        calc.numPadAction(4);
     }//GEN-LAST:event_b4ActionPerformed
 
     private void b5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b5ActionPerformed
-        // TODO add your handling code here:
-        calc.b5Action();
+        calc.numPadAction(5);
     }//GEN-LAST:event_b5ActionPerformed
 
     private void b6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b6ActionPerformed
-        // TODO add your handling code here:
-        calc.b6Action();
+        calc.numPadAction(6);
     }//GEN-LAST:event_b6ActionPerformed
 
     private void b7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b7ActionPerformed
-        // TODO add your handling code here:
-        calc.b7Action();
+        calc.numPadAction(7);
     }//GEN-LAST:event_b7ActionPerformed
 
     private void b8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b8ActionPerformed
-        // TODO add your handling code here:
-        calc.b8Action();
+        calc.numPadAction(8);
     }//GEN-LAST:event_b8ActionPerformed
 
     private void bRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRootActionPerformed
-        // TODO add your handling code here:
         calc.calculationHub((short) 6);
     }//GEN-LAST:event_bRootActionPerformed
 
     private void bBackSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackSpaceActionPerformed
-        // TODO add your handling code here:
         calc.backSpaceAction();
     }//GEN-LAST:event_bBackSpaceActionPerformed
 
     private void bCleannerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCleannerActionPerformed
-        // TODO add your handling code here:
         calc.cleanVariables(2);
         calc.cleanVariables(3);
         calc.cleanVariables(4);
@@ -450,64 +438,52 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bCleannerActionPerformed
 
     private void bSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubActionPerformed
-        // TODO add your handling code here:
         calc.calculationHub((short) 2);
     }//GEN-LAST:event_bSubActionPerformed
 
     private void bMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMultActionPerformed
-        // TODO add your handling code here:
         calc.calculationHub((short) 3);
     }//GEN-LAST:event_bMultActionPerformed
 
     private void bDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDivActionPerformed
-        // TODO add your handling code here:
         calc.calculationHub((short) 4);
     }//GEN-LAST:event_bDivActionPerformed
 
     private void bEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEqualActionPerformed
-        // TODO add your handling code here:
         calc.equalsAction();
     }//GEN-LAST:event_bEqualActionPerformed
 
     private void bFloatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFloatActionPerformed
-        // TODO add your handling code here:
         calc.bFloatAction();
     }//GEN-LAST:event_bFloatActionPerformed
 
     private void bMaisMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMaisMenosActionPerformed
-        // TODO add your handling code here:
         calc.validateNumber();
         calc.negativeNumber();
     }//GEN-LAST:event_bMaisMenosActionPerformed
 
     private void bSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSumActionPerformed
-        // TODO add your handling code here:
         calc.calculationHub((short) 1);
     }//GEN-LAST:event_bSumActionPerformed
 
     private void inputTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputTextKeyPressed
-        // TODO add your handling code here:
         calc.inputTextKeyPressedAction(evt);
     }//GEN-LAST:event_inputTextKeyPressed
 
     private void bCleanNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCleanNumActionPerformed
-        // TODO add your handling code here:
         calc.bCleanNumAction();
     }//GEN-LAST:event_bCleanNumActionPerformed
 
     private void bPowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPowActionPerformed
-        // TODO add your handling code here:
         calc.calculationHub((short) 5);
     }//GEN-LAST:event_bPowActionPerformed
 
     private void bPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPercActionPerformed
-        // TODO add your handling code here:
         calc.percentStart();
     }//GEN-LAST:event_bPercActionPerformed
 
     private void b9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b9ActionPerformed
-        // TODO add your handling code here:
-        calc.b9Action();
+        calc.numPadAction(9);
     }//GEN-LAST:event_b9ActionPerformed
 
     /**

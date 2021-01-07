@@ -4,7 +4,7 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 2016 Classe: 1417 Methods: 79
+ * @author Alex Bonadio Total Code Lines: 1845 Classe: 1281 Methods: 71
  */
 public class Calculator {
 
@@ -178,7 +178,7 @@ public class Calculator {
                 executeAnotherOperation(op);  // então é chamado o método para fazer o cálculo de outra operação
             }
             if (operation != op && operation != 0 && secondOpTyped == true // se a operação escolhida não for a mesma da anterior e o usuário já clicou em algum botão das operações aritmétcas 1 ou 2 vezes
-                    || operation != op && operation != 0 && firstOpTyped == true) { // então ele trocou de operação, escolheru outra
+                    || operation != op && operation != 0 && firstOpTyped == true) { // então ele trocou de operação, escolheu outra
 
                 System.out.println("[2º IF] Se a operação anterior " + operation + " é != ");
                 System.out.println("[2º IF] da operação atual [op: " + op + "]");
@@ -202,7 +202,7 @@ public class Calculator {
             formatLimit(operation);  // o método limpa a string que é exibida no 2º display, caso ultrapasse o tamanho do próprio display, exibindo apenas o último resultado
 
         }
-        focus();  // faz o foco do cursor ficar em cima do display principal
+        focus();  // faz o cursor ficar em cima do display principal
     }
 
     // método que faz a operação aritmética da opção anterior do usuário
@@ -213,14 +213,14 @@ public class Calculator {
         System.out.println("e o formatAnotherOperation(" + op + ")");
 
         arithmeticSwitch();  // chama o método arithmeticSwitch que direciona para o método de operação simples de acordo com a operação escolhida pelo usuário
-        formatAnotherOperation(op);
+        formatAnotherOperation(op); // método que formata a expressão matemática no 2º display, trocando o sinal de operação nela
         operation = op;  // depois que foi feito o cálculo de outra operação, por ex., o botão de soma fez o papel do igual, a operação agora será exemplo: [1 - soma], não mais a anterior escolhida pelo usuário 
         accOperation = operation;  // agora o número da operação é salvo na memória RAM, para ser usado no acumulador
         countOpClick = 1; // como é a primeira vez que o usuário clicou no botão de operação, a contagem de clique aumenta para 1
-        equalsClick = 0;  // a contagem da quantidade de clicks em cima do = é configurado para 0
+        equalsClick = 0;  // a contagem da quantidade de clicks em cima do = é configurada para 0
         numpadTyped = false;  // o registro do clique do mouse em cima do teclado numérico é configurado como falso
         firstOpTyped = true;  // o registro do clique do mouse em cima do botão de operação é configurado como verdadeiro
-        secondOpTyped = true;
+        secondOpTyped = true; // é registrado que o usuário deu o 2º clique em um botão de operação aritmética
 
         System.out.println("Configurou as variáveis");
         System.out.println("operation(" + operation + ") = op(" + op + ")");
@@ -263,7 +263,7 @@ public class Calculator {
             }
         }
         mathExpression = new String(chars);
-        calcGUI.labelExp.setText(mathExpression);
+        calcGUI.labelExp.setText(mathExpression); // o sinal da nova operação aritmetica é impressa no 2º display
         equalsClick = 0;
         operation = op;
         accOperation = operation;
@@ -639,7 +639,7 @@ public class Calculator {
         }
     }
 
-    // se o tamanho da string do 1º display ultrapassar 20 algarismos, os botões númericos serão bloqueados
+    // se o tamanho da string do 1º display ultrapassar 19 algarismos, os botões númericos serão bloqueados
     public boolean formatMaxSize() {
         boolean maxsize = false;
         int size = calcGUI.inputText.getText().length();
@@ -994,12 +994,12 @@ public class Calculator {
         focus();
     }
 
-    // // método do botão 0
+    // método do botão 0
     public void b0Action() {
         validateNumber();
         pressedOpButton();
         boolean maxsize = formatMaxSize();
-        if (maxsize == false) { // se o numero nao ultrapassou 20 caracteres
+        if (maxsize == false) { // se o numero nao ultrapassou 19 caracteres
             if (!calcGUI.inputText.getText().equals("0")) {
                 calcGUI.inputText.setText(calcGUI.inputText.getText() + "0");
                 boolean check = formatDynamicallyNegativeNumber();
@@ -1013,15 +1013,15 @@ public class Calculator {
         }
         focus();
     }
-
-    // // método do botão 1
-    public void b1Action() {
+    
+    // método que imprime os números de 1 a 9 nos displays 
+    public void numPadAction(int num) {
         validateNumber();
         replaceZero();
         pressedOpButton();
         boolean maxsize = formatMaxSize();
-        if (maxsize == false) { // se não atingiu o número máximo, então é impresso o 1 no 1º Display
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "1");
+        if (maxsize == false) { // se não atingiu a quant. máxima de algarismos, é impresso o número digitado no 1º Display
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + num);
             boolean check = formatDynamicallyNegativeNumber();
             if (check == false) {
                 calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
@@ -1030,143 +1030,7 @@ public class Calculator {
         }
         focus();
     }
-
-    // método do botão 2
-    public void b2Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "2");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 3
-    public void b3Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "3");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 4
-    public void b4Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "4");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 5
-    public void b5Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "5");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 6
-    public void b6Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "6");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 7
-    public void b7Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "7");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 8
-    public void b8Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "8");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
-    // método do botão 9
-    public void b9Action() {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + "9");
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
-            }
-            numpadTyped = true;
-        }
-        focus();
-    }
-
+    
     // método para o botão do backspace
     public void backSpaceAction() {
         boolean check = validateNumber();
@@ -1270,31 +1134,31 @@ public class Calculator {
             b0Action(); // 0
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD1
                 || evt.getKeyCode() == KeyEvent.VK_1) {
-            b1Action(); // 1
+             numPadAction(1); // 1
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD2
                 || evt.getKeyCode() == KeyEvent.VK_2) {
-            b2Action(); // 2
+            numPadAction(2); // 1
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD3
                 || evt.getKeyCode() == KeyEvent.VK_3) {
-            b3Action(); // 3
+            numPadAction(3); // 3
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD4
                 || evt.getKeyCode() == KeyEvent.VK_4) {
-            b4Action(); // 4
+            numPadAction(4); // 4
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD5
                 || evt.getKeyCode() == KeyEvent.VK_5) {
-            b5Action(); // 5
+            numPadAction(5); // 5
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD6
                 || evt.getKeyCode() == KeyEvent.VK_6) {
-            b6Action(); // 6
+            numPadAction(6); // 6
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD7
                 || evt.getKeyCode() == KeyEvent.VK_7) {
-            b7Action(); // 7
+            numPadAction(7); // 7
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD8
                 || evt.getKeyCode() == KeyEvent.VK_8) {
-            b8Action(); // 8
+            numPadAction(8); // 8
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD9
                 || evt.getKeyCode() == KeyEvent.VK_9) {
-            b9Action(); // 9
+            numPadAction(9); // 9
         } else if (evt.getKeyCode() == KeyEvent.VK_DECIMAL
                 || evt.getKeyCode() == KeyEvent.VK_PERIOD) {
             bFloatAction(); // .
