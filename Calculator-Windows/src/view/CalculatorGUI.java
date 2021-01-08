@@ -109,7 +109,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bMult.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bMult.setForeground(new java.awt.Color(255, 255, 0));
+        bMult.setForeground(new java.awt.Color(0, 255, 204));
         bMult.setMnemonic('*');
         bMult.setText("x");
         bMult.setToolTipText("");

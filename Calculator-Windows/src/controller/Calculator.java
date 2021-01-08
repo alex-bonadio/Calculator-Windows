@@ -37,7 +37,7 @@ public class Calculator {
                 cleanVariables(2);  // Se no 1º Display (Principal) tiver as palavras Impossible ou Exceed 
                 cleanVariables(3); // então várias variáveis são apagadas e reinicializadas
                 writeZero();      // depois de apagá-las é impresso 0 no Display Principal 
-                check = false;  // false significa que não passou no teste, tem caracteres inválidos
+                check = false;   // false significa que não passou no teste, tem caracteres inválidos
             } else {
                 // calcGUI.inputText.getText().matches("^[-0.0-9.0]*$");
                 check = true;  // true significa que passou na validação, não tem caracteres inválidos
@@ -265,8 +265,8 @@ public class Calculator {
         mathExpression = new String(chars);
         calcGUI.labelExp.setText(mathExpression); // o sinal da nova operação aritmetica é impressa no 2º display
         equalsClick = 0;
-        operation = op;
-        accOperation = operation;
+        operation = op;              // a nova operação aritmética escolhida é salva na variável global operation                      
+        accOperation = operation;   // e também é salva na variável global accOperation, caso o usuário faça acumulação pressionando várias vezes o botão de igual
 
         System.out.println("Configurou as variáveis");
         System.out.println("operation(" + operation + ") = op(" + op + ")");
@@ -338,7 +338,7 @@ public class Calculator {
 
             System.out.println("[2º IF] Se o countOpClick = " + countOpClick);
             System.out.println("[2º IF] e o secondOpTyped = " + secondOpTyped + " então");
-            System.out.println("[2º IF] a variável auxliar recebe o 2º operando = " + aux);
+            System.out.println("[2º IF] a variável auxliar recebeu o 2º operando = " + aux);
             System.out.println("Chamou o método calculationSwitch(" + op + ")");
 
             calculationSwitch(op);
@@ -642,15 +642,14 @@ public class Calculator {
     // se o tamanho da string do 1º display ultrapassar 19 algarismos, os botões númericos serão bloqueados
     public boolean formatMaxSize() {
         boolean maxsize = false;
-        int size = calcGUI.inputText.getText().length();
-        if (size >= 19) {
-            maxsize = true;
+        int size = calcGUI.inputText.getText().length();  // é salvo em size o tamanho da string
+        if (size >= 19) {  // se a quant. de algarismos digitados pelo usuário for maior ou igual a 19
+            maxsize = true; // maxsize é configurado para true, então o usuário não conseguirá mais digitar algarismos
         }
         return maxsize;
     }
-
+    // método imprime zero no 1º display e apaga a expressão matemática que aparece no 2º display
     public void formatZero() {
-
         if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
             calcGUI.inputText.setText("0");
             mathExpression = "";
@@ -887,6 +886,7 @@ public class Calculator {
                 }
             }
             firstOpTyped = true;
+            numpadTyped = true;
         }
     }
 
@@ -987,48 +987,48 @@ public class Calculator {
         }
     }
 
-    // método escreve 0 no display
+    // método escreve 0 no 1º display
     public void writeZero() {
         calcGUI.inputText.setText("0");
-        numpadTyped = true;
+        numpadTyped = true;  // é registrado que o usuário clicou no botão zero
         focus();
     }
 
     // método do botão 0
     public void b0Action() {
-        validateNumber();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
+        validateNumber();   // método valida a entrada do usuário, permitindo apenas números e o char E do euler 
+        pressedOpButton(); // configura para false as variáveis globais que registram se o usuário já clicou uma ou mais vezes no botão de operações aritméticas e apaga a string no 1º Display para que seja impresso o número escolhido pelo usuário 
+        boolean maxsize = formatMaxSize();  // verifica se a quantidade de algarismos digitados pelo usuário não ultrapassou 19 
         if (maxsize == false) { // se o número nao ultrapassou 19 caracteres
-            if (!calcGUI.inputText.getText().equals("0")) {
-                calcGUI.inputText.setText(calcGUI.inputText.getText() + "0");
-                boolean check = formatDynamicallyNegativeNumber();
+            if (!calcGUI.inputText.getText().equals("0")) { // se o número digitado anteriormente pelo usuário for diferente de zero
+                calcGUI.inputText.setText(calcGUI.inputText.getText() + "0"); // então é impresso no 1º display, o algarismo zero
+                boolean check = formatDynamicallyNegativeNumber(); // coloca parênteses em volta de um número negativo
                 if (check == false) { // se o número não for negativo
-                    calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
+                    calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText()); // imprime o número no 2º display
                 }
-                numpadTyped = true;
-            } else if (calcGUI.inputText.getText().equals("0")) { // se o número escolhido for 0, então ele é impresso no 2º display
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
+                numpadTyped = true; // é registrado que o usuário clicou no botão zero
+            } else if (calcGUI.inputText.getText().equals("0")) { // se o número escolhido for 0
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText()); // então ele é impresso no 2º display
             }
         }
-        focus();
+        focus();  // mantem o cursor no 1º display
     }
     
     // método que imprime os números de 1 a 9 nos displays 
     public void numPadAction(int num) {
-        validateNumber();
-        replaceZero();
-        pressedOpButton();
-        boolean maxsize = formatMaxSize();
+        validateNumber();    // método valida a entrada do usuário, permitindo apenas números e o char E do euler 
+        replaceZero();      //  caso tenha apenas o algarismo zero na tela, apaga a string para imprimir o número digitado pelo usuário
+        pressedOpButton(); //   configura para false as variáveis globais que registram se o usuário já clicou uma ou mais vezes no botão de operações aritméticas e apaga a string no 1º Display para que seja impresso o número escolhido pelo usuário
+        boolean maxsize = formatMaxSize();  // verifica se a quantidade de algarismos digitados pelo usuário não ultrapassou 19
         if (maxsize == false) { // se não atingiu a quant. máxima de algarismos, é impresso o número digitado no 1º Display
-            calcGUI.inputText.setText(calcGUI.inputText.getText() + num);
-            boolean check = formatDynamicallyNegativeNumber();
-            if (check == false) {
-                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());
+            calcGUI.inputText.setText(calcGUI.inputText.getText() + num);  // imprime no 1ª display o número digitado
+            boolean check = formatDynamicallyNegativeNumber(); // coloca parênteses em volta de um número negativo
+            if (check == false) {  // se o número não for negativo
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());  // imprime o número no 2º display
             }
-            numpadTyped = true;
+            numpadTyped = true;  // registra que o usuário já clicou em algum número
         }
-        focus();
+        focus(); // mantem o cursor no 1º display
     }
     
     // método para o botão do backspace
