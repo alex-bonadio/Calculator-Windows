@@ -643,7 +643,7 @@ public class Calculator {
     public boolean formatMaxSize() {
         boolean maxsize = false;
         int size = calcGUI.inputText.getText().length();  // é salvo em size o tamanho da string
-        if (size >= 19) {  // se a quant. de algarismos digitados pelo usuário for maior ou igual a 19
+        if (size >= 40) {  // se a quant. de algarismos digitados pelo usuário for maior ou igual a 19
             maxsize = true; // maxsize é configurado para true, então o usuário não conseguirá mais digitar algarismos
         }
         return maxsize;
@@ -944,7 +944,7 @@ public class Calculator {
     public void negativeNumber() {
         if (!calcGUI.inputText.getText().isEmpty()) {
             boolean maxsize = formatMaxSize();
-            if (maxsize == false) {
+            if (maxsize == false && equalsClick == 0) {
                 String input = "";  // String input = calcGUI.inputText.getText();
                 String signal = "";
                 if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
@@ -1080,7 +1080,7 @@ public class Calculator {
     public void bFloatAction() {
         boolean check = validateNumber();
         boolean maxsize = formatMaxSize();
-        if (maxsize == false) {
+        if (maxsize == false && equalsClick == 0) {
             if (!calcGUI.inputText.getText().contains(".") && check == true) {
                 calcGUI.inputText.setText(calcGUI.inputText.getText() + ".");
                 firstOpTyped = false;
