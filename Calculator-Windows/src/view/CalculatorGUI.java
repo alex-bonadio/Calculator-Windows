@@ -109,7 +109,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bMult.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bMult.setForeground(new java.awt.Color(0, 255, 204));
+        bMult.setForeground(new java.awt.Color(255, 255, 0));
         bMult.setMnemonic('*');
         bMult.setText("x");
         bMult.setToolTipText("");
@@ -129,7 +129,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bDiv.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bDiv.setForeground(new java.awt.Color(0, 153, 153));
+        bDiv.setForeground(new java.awt.Color(0, 255, 0));
+        bDiv.setMnemonic('/');
         bDiv.setText("/");
         bDiv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +200,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bSub.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bSub.setForeground(new java.awt.Color(51, 0, 204));
+        bSub.setForeground(new java.awt.Color(255, 153, 51));
+        bSub.setMnemonic('-');
         bSub.setText("-");
         bSub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,8 +222,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bSum.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bSum.setForeground(new java.awt.Color(0, 102, 255));
-        bSum.setMnemonic('-');
+        bSum.setForeground(new java.awt.Color(0, 204, 204));
+        bSum.setMnemonic('+');
         bSum.setText("+");
         bSum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

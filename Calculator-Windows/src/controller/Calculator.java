@@ -34,7 +34,7 @@ public class Calculator {
         if (!calcGUI.inputText.getText().isEmpty()) {
             if (calcGUI.inputText.getText().contains("Impossible")
                     || calcGUI.inputText.getText().contains("Exceeded")) {
-                cleanVariables(2);  // Se no 1º Display (Principal) tiver as palavras Impossible ou Exceed 
+                cleanVariables(2);  // Se no 1º Display (Principal) tiver as palavras Impossible ou Exceeded
                 cleanVariables(3); // então várias variáveis são apagadas e reinicializadas
                 writeZero();      // depois de apagá-las é impresso 0 no Display Principal 
                 check = false;   // false significa que não passou no teste, tem caracteres inválidos
@@ -102,7 +102,7 @@ public class Calculator {
                 case 6:
                     simpleRoot(); // raiz quadrada
                     break;
-                case 7:               // caso 7, chama o método que calcula utilizando porcentagem
+                case 7:               // caso 7, chama o método que calcula porcentagem
                     percentCalc();   // com soma
                     break;
                 case 8:
@@ -238,7 +238,7 @@ public class Calculator {
         System.out.println("\nexecuteSignalChange(" + op + ")");
 
         char chars[] = null;
-        int i = mathExpression.length() -1;
+        int i = mathExpression.length() - 1;
         if (i > 0) {
             chars = mathExpression.toCharArray();
             switch (op) {
@@ -648,6 +648,7 @@ public class Calculator {
         }
         return maxsize;
     }
+
     // método imprime zero no 1º display e apaga a expressão matemática que aparece no 2º display
     public void formatZero() {
         if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
@@ -841,52 +842,54 @@ public class Calculator {
     // método prepara as variavies para poder ser feito os cálculos de porcentagem
     // misturados com as operações aritméticas básicas
     public void percentStart() {
-        boolean check = validateNumber();
-        if (check == true) {
-            if (operation == 0 || operation == 1 || operation == 2
-                    || operation == 3 || operation == 4
-                    || operation == 7 || operation == 8
-                    || operation == 9 || operation == 10) {
-                maxNumber(number);
-                switch (operation) {
-                    case 0:
-                        accOperation = 11; // é salvo na memória como 11 uma operação inicial de porcentagem, ex: (150 % = 1.50), sem as operações básicas (+ - * /)
-                        equalsClick = 0;  //  configurado a quantidade de cliques no botão de igual para 0, para ser possível utilizar o backspace após uma operação de porcentagem inicial, de número 11
-                        break;
-                    case 1:             // adição sem porcentagem
-                        operation = 7; // se tornará a adição usada juntamente com a porcentagem
-                        break;
-                    case 2:            // subtração 
-                        operation = 8;
-                        break;
-                    case 3:           // multiplicação
-                        operation = 9;
-                        break;
-                    case 4:          // divisão
-                        operation = 10;
-                        break;
-                    default:
-                        break;
-                }
-                formatPercentMultiCalculation(); // formata a expressão matemática com porcentagem impressa no 2º display
-                if (operation == 0) {  // se não foi escolhido nenhuma operação, então o usuário digitou um número e depois clicou no botão de porcentagem, assim o número será dividido por 100
-                    number = Double.valueOf(calcGUI.inputText.getText()) / 100;
-                    formatPercent1Display(number);
-                } else {
-                    mathExpression = mathExpression + "[" + calcGUI.inputText.getText() + "% of " + formatPercent2Display(number) + " = ";
-                    double numPerc = (number / 100) * Double.valueOf(calcGUI.inputText.getText());
-                    aux = numPerc;
-                    check = maxNumber(numPerc);
-                    if (check == true) {
-                        formatPercent1Display(numPerc);
-                        mathExpression = mathExpression + formatPercent2Display(Double.valueOf(calcGUI.inputText.getText())) + "]";
-                        calcGUI.labelExp.setText(mathExpression);
-                        formatLimit(7);
+        boolean check = validateNumber();  // verifica se a entrada do usuário tem apenas números
+        if (check == true) {              // true significa que só tem números
+            boolean test = maxNumber(number); // verifica se o número não ultrapassou o limite do double
+            if (test == true) {              // true significa que não ultrapassou
+                if (operation == 0 || operation == 1 || operation == 2
+                        || operation == 3 || operation == 4
+                        || operation == 7 || operation == 8
+                        || operation == 9 || operation == 10) {
+                    switch (operation) {
+                        case 0:
+                            accOperation = 11; // é salvo na memória como 11 uma operação inicial de porcentagem, ex: (150 % = 1.50), sem as operações básicas (+ - * /)
+                            equalsClick = 0;  //  configurado a quantidade de cliques no botão de igual para 0, para ser possível utilizar o backspace após uma operação de porcentagem inicial, de número 11
+                            break;
+                        case 1:             // adição sem porcentagem
+                            operation = 7; // se tornará a adição usada juntamente com a porcentagem
+                            break;
+                        case 2:            // subtração 
+                            operation = 8;
+                            break;
+                        case 3:           // multiplicação
+                            operation = 9;
+                            break;
+                        case 4:          // divisão
+                            operation = 10;
+                            break;
+                        default:
+                            break;
+                    }
+                    formatPercentMultiCalculation(); // formata a expressão matemática com porcentagem impressa no 2º display
+                    if (operation == 0) {  // se não foi escolhido nenhuma operação, então o usuário digitou um número e depois clicou no botão de porcentagem, assim o número será dividido por 100
+                        number = Double.valueOf(calcGUI.inputText.getText()) / 100;
+                        formatPercent1Display(number);
+                    } else {
+                        mathExpression = mathExpression + "[" + calcGUI.inputText.getText() + "% of " + formatPercent2Display(number) + " = ";
+                        double numPerc = (number / 100) * Double.valueOf(calcGUI.inputText.getText());
+                        aux = numPerc;
+                        check = maxNumber(numPerc);
+                        if (check == true) {
+                            formatPercent1Display(numPerc);
+                            mathExpression = mathExpression + formatPercent2Display(Double.valueOf(calcGUI.inputText.getText())) + "]";
+                            calcGUI.labelExp.setText(mathExpression);
+                            formatLimit(7);
+                        }
                     }
                 }
+                firstOpTyped = true;
+                numpadTyped = true;
             }
-            firstOpTyped = true;
-            numpadTyped = true;
         }
     }
 
@@ -1013,7 +1016,7 @@ public class Calculator {
         }
         focus();  // mantem o cursor no 1º display
     }
-    
+
     // método que imprime os números de 1 a 9 nos displays 
     public void numPadAction(int num) {
         validateNumber();    // método valida a entrada do usuário, permitindo apenas números e o char E do euler 
@@ -1030,7 +1033,7 @@ public class Calculator {
         }
         focus(); // mantem o cursor no 1º display
     }
-    
+
     // método para o botão do backspace
     public void backSpaceAction() {
         boolean check = validateNumber();
@@ -1039,7 +1042,7 @@ public class Calculator {
                     || operation == 3 || operation == 4
                     || operation == 5 || operation == 6) {
 
-                if (secondOpTyped == false && equalsClick == 0 
+                if (secondOpTyped == false && equalsClick == 0
                         && !calcGUI.inputText.getText().contains("E")) {
                     String input = calcGUI.inputText.getText();      // salva a entrada do usuário em input
                     StringBuilder str = new StringBuilder(input);  // transforma o objeto String em StringBuilder
@@ -1134,7 +1137,7 @@ public class Calculator {
             b0Action(); // 0
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD1
                 || evt.getKeyCode() == KeyEvent.VK_1) {
-             numPadAction(1); // 1
+            numPadAction(1); // 1
         } else if (evt.getKeyCode() == KeyEvent.VK_NUMPAD2
                 || evt.getKeyCode() == KeyEvent.VK_2) {
             numPadAction(2); // 1
@@ -1184,7 +1187,7 @@ public class Calculator {
 
     // método que configura o maior número que a calculadora suporta, ((2^63)-2) positivo ou negativo)
     public boolean maxNumber(double num) {
-        boolean check = true;
+        boolean check = true; // se o número não passou do limite 
         double max = Math.pow(2, 63);
         if (num >= max || num <= -max // se o número chegou ao limite da calculadora
                 || Double.valueOf(calcGUI.inputText.getText()) >= max
@@ -1193,7 +1196,7 @@ public class Calculator {
             //        calcGUI.labelExp.setText(mathExpression);
             cleanVariables(2); // apaga as variaveis, se excedeu o número máximo
             cleanVariables(4);
-            check = false;
+            check = false; // se passou do limite
         }
         return check;
     }

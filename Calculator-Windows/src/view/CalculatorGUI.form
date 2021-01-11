@@ -289,7 +289,7 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="ff" red="0" type="rgb"/>
+          <Color blue="0" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="mnemonic" type="int" value="42"/>
         <Property name="text" type="java.lang.String" value="x"/>
@@ -323,8 +323,9 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="0" type="rgb"/>
+          <Color blue="0" green="ff" red="0" type="rgb"/>
         </Property>
+        <Property name="mnemonic" type="int" value="47"/>
         <Property name="text" type="java.lang.String" value="/"/>
       </Properties>
       <Events>
@@ -449,8 +450,9 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="0" red="33" type="rgb"/>
+          <Color blue="33" green="99" red="ff" type="rgb"/>
         </Property>
+        <Property name="mnemonic" type="int" value="45"/>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
       <Events>
@@ -496,9 +498,9 @@
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="66" red="0" type="rgb"/>
+          <Color blue="cc" green="cc" red="0" type="rgb"/>
         </Property>
-        <Property name="mnemonic" type="int" value="45"/>
+        <Property name="mnemonic" type="int" value="43"/>
         <Property name="text" type="java.lang.String" value="+"/>
       </Properties>
       <Events>
