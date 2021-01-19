@@ -288,9 +288,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="ff" red="ff" type="rgb"/>
-        </Property>
         <Property name="mnemonic" type="int" value="42"/>
         <Property name="text" type="java.lang.String" value="x"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -321,9 +318,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="ff" red="0" type="rgb"/>
         </Property>
         <Property name="mnemonic" type="int" value="47"/>
         <Property name="text" type="java.lang.String" value="/"/>
@@ -449,9 +443,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="99" red="ff" type="rgb"/>
-        </Property>
         <Property name="mnemonic" type="int" value="45"/>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
@@ -496,9 +487,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="mnemonic" type="int" value="43"/>
         <Property name="text" type="java.lang.String" value="+"/>
