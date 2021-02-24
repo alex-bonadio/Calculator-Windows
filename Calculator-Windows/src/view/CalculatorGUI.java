@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1845 Classe: 575 Methods: 27
+ * @author Alex Bonadio Total Code Lines: 1960 Classe: 647 Methods: 29
  */
 public class CalculatorGUI extends javax.swing.JFrame {
 
@@ -32,16 +32,20 @@ public class CalculatorGUI extends javax.swing.JFrame {
         b0 = new javax.swing.JButton();
         bEqual = new javax.swing.JButton();
         bFloat = new javax.swing.JButton();
-        bCleanner = new javax.swing.JButton();
-        bBackSpace = new javax.swing.JButton();
+        bMC = new javax.swing.JButton();
+        bMPlus = new javax.swing.JButton();
         bSub = new javax.swing.JButton();
         labelExp = new javax.swing.JLabel();
-        bMaisMenos = new javax.swing.JButton();
+        bNegative = new javax.swing.JButton();
         bSum = new javax.swing.JButton();
-        bCleanNum = new javax.swing.JButton();
-        bPow = new javax.swing.JButton();
+        bMR = new javax.swing.JButton();
+        bMMinus = new javax.swing.JButton();
         bPerc = new javax.swing.JButton();
         b9 = new javax.swing.JButton();
+        bBackSpace = new javax.swing.JButton();
+        bCleanNum = new javax.swing.JButton();
+        bPow = new javax.swing.JButton();
+        bCleanner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculator");
@@ -77,6 +81,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         bRoot.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bRoot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-raiz-quadrada-32.png"))); // NOI18N
+        bRoot.setToolTipText("Raiz Enésima");
         bRoot.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bRoot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +114,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bMult.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bMult.setForeground(new java.awt.Color(255, 255, 0));
         bMult.setMnemonic('*');
         bMult.setText("x");
         bMult.setToolTipText("");
@@ -128,6 +134,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bDiv.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bDiv.setForeground(new java.awt.Color(0, 255, 0));
         bDiv.setMnemonic('/');
         bDiv.setText("/");
         bDiv.addActionListener(new java.awt.event.ActionListener() {
@@ -178,26 +185,29 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
 
-        bCleanner.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        bCleanner.setForeground(new java.awt.Color(255, 0, 0));
-        bCleanner.setText("C");
-        bCleanner.addActionListener(new java.awt.event.ActionListener() {
+        bMC.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bMC.setForeground(new java.awt.Color(255, 0, 0));
+        bMC.setText("MC");
+        bMC.setToolTipText("Apaga o número salvo na memória");
+        bMC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCleannerActionPerformed(evt);
+                bMCActionPerformed(evt);
             }
         });
 
-        bBackSpace.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bBackSpace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-backspace-32.png"))); // NOI18N
-        bBackSpace.setHideActionText(true);
-        bBackSpace.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        bBackSpace.addActionListener(new java.awt.event.ActionListener() {
+        bMPlus.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bMPlus.setText("M+");
+        bMPlus.setToolTipText("Adição à Memória");
+        bMPlus.setHideActionText(true);
+        bMPlus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bMPlus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBackSpaceActionPerformed(evt);
+                bMPlusActionPerformed(evt);
             }
         });
 
         bSub.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bSub.setForeground(new java.awt.Color(255, 153, 51));
         bSub.setMnemonic('-');
         bSub.setText("-");
         bSub.addActionListener(new java.awt.event.ActionListener() {
@@ -210,15 +220,17 @@ public class CalculatorGUI extends javax.swing.JFrame {
         labelExp.setForeground(new java.awt.Color(0, 0, 255));
         labelExp.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        bMaisMenos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bMaisMenos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-mais-e-menos-32.png"))); // NOI18N
-        bMaisMenos.addActionListener(new java.awt.event.ActionListener() {
+        bNegative.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bNegative.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-mais-e-menos-32.png"))); // NOI18N
+        bNegative.setToolTipText("Número Negativo");
+        bNegative.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bMaisMenosActionPerformed(evt);
+                bNegativeActionPerformed(evt);
             }
         });
 
         bSum.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bSum.setForeground(new java.awt.Color(0, 204, 204));
         bSum.setMnemonic('+');
         bSum.setText("+");
         bSum.addActionListener(new java.awt.event.ActionListener() {
@@ -227,28 +239,30 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
 
-        bCleanNum.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        bCleanNum.setForeground(new java.awt.Color(255, 0, 0));
-        bCleanNum.setText("CE");
-        bCleanNum.addActionListener(new java.awt.event.ActionListener() {
+        bMR.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bMR.setForeground(new java.awt.Color(0, 51, 255));
+        bMR.setText("MR");
+        bMR.setToolTipText("Rechamada da Memória");
+        bMR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCleanNumActionPerformed(evt);
+                bMRActionPerformed(evt);
             }
         });
 
-        bPow.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bPow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/power_icon24.png"))); // NOI18N
-        bPow.setToolTipText("");
-        bPow.setMaximumSize(new java.awt.Dimension(51, 25));
-        bPow.setMinimumSize(new java.awt.Dimension(51, 25));
-        bPow.addActionListener(new java.awt.event.ActionListener() {
+        bMMinus.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bMMinus.setText("M-");
+        bMMinus.setToolTipText("Subtração da Memória");
+        bMMinus.setMaximumSize(new java.awt.Dimension(51, 25));
+        bMMinus.setMinimumSize(new java.awt.Dimension(51, 25));
+        bMMinus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bPowActionPerformed(evt);
+                bMMinusActionPerformed(evt);
             }
         });
 
         bPerc.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         bPerc.setText("%");
+        bPerc.setToolTipText("Porcentagem ");
         bPerc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bPercActionPerformed(evt);
@@ -260,6 +274,48 @@ public class CalculatorGUI extends javax.swing.JFrame {
         b9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b9ActionPerformed(evt);
+            }
+        });
+
+        bBackSpace.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bBackSpace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/icons8-backspace-32.png"))); // NOI18N
+        bBackSpace.setToolTipText("BackSpace");
+        bBackSpace.setHideActionText(true);
+        bBackSpace.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bBackSpace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBackSpaceActionPerformed(evt);
+            }
+        });
+
+        bCleanNum.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bCleanNum.setForeground(new java.awt.Color(255, 0, 0));
+        bCleanNum.setText("CE");
+        bCleanNum.setToolTipText("Apaga o último número digitado");
+        bCleanNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCleanNumActionPerformed(evt);
+            }
+        });
+
+        bPow.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bPow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/power_icon24.png"))); // NOI18N
+        bPow.setToolTipText("Potenciação");
+        bPow.setMaximumSize(new java.awt.Dimension(51, 25));
+        bPow.setMinimumSize(new java.awt.Dimension(51, 25));
+        bPow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPowActionPerformed(evt);
+            }
+        });
+
+        bCleanner.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        bCleanner.setForeground(new java.awt.Color(255, 0, 0));
+        bCleanner.setText("C");
+        bCleanner.setToolTipText("Apaga toda a memória");
+        bCleanner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCleannerActionPerformed(evt);
             }
         });
 
@@ -277,22 +333,26 @@ public class CalculatorGUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(bCleanner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bMC, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bCleanNum, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(bMR, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(b1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(b7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(b4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bMaisMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(bNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(b2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(b8, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(b5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(b0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(bPerc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(bPerc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(bCleanner, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(bCleanNum, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -316,6 +376,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(bSub, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(bMPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(bMMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(bBackSpace)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(bPow, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -329,6 +393,14 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 .addComponent(inputText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelExp, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(bMPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(bMMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bMR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bMC, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -367,17 +439,15 @@ public class CalculatorGUI extends javax.swing.JFrame {
                     .addComponent(b1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bEqual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bMaisMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(b0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bFloat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(b0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bFloat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b0, bMaisMenos});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b0, bNegative});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bDiv, bMult, bSub, bSum});
 
@@ -424,16 +494,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         calc.calculationHub((short) 6);
     }//GEN-LAST:event_bRootActionPerformed
 
-    private void bBackSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackSpaceActionPerformed
-        calc.backSpaceAction();
-    }//GEN-LAST:event_bBackSpaceActionPerformed
+    private void bMPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMPlusActionPerformed
+        calc.memorise();
+    }//GEN-LAST:event_bMPlusActionPerformed
 
-    private void bCleannerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCleannerActionPerformed
-        calc.cleanVariables(2);
-        calc.cleanVariables(3);
-        calc.cleanVariables(4);
-        calc.writeZero();
-    }//GEN-LAST:event_bCleannerActionPerformed
+    private void bMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMCActionPerformed
+        calc.cleanVariables(5);
+    }//GEN-LAST:event_bMCActionPerformed
 
     private void bSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubActionPerformed
         calc.calculationHub((short) 2);
@@ -455,10 +522,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         calc.bFloatAction();
     }//GEN-LAST:event_bFloatActionPerformed
 
-    private void bMaisMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMaisMenosActionPerformed
+    private void bNegativeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNegativeActionPerformed
         calc.validateNumber();
         calc.negativeNumber();
-    }//GEN-LAST:event_bMaisMenosActionPerformed
+    }//GEN-LAST:event_bNegativeActionPerformed
 
     private void bSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSumActionPerformed
         calc.calculationHub((short) 1);
@@ -468,13 +535,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         calc.inputTextKeyPressedAction(evt);
     }//GEN-LAST:event_inputTextKeyPressed
 
-    private void bCleanNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCleanNumActionPerformed
-        calc.bCleanNumAction();
-    }//GEN-LAST:event_bCleanNumActionPerformed
+    private void bMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMRActionPerformed
+        calc.memoryRecall();
+    }//GEN-LAST:event_bMRActionPerformed
 
-    private void bPowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPowActionPerformed
-        calc.calculationHub((short) 5);
-    }//GEN-LAST:event_bPowActionPerformed
+    private void bMMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMMinusActionPerformed
+        calc.cleanVariables(5);
+    }//GEN-LAST:event_bMMinusActionPerformed
 
     private void bPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPercActionPerformed
         calc.percentStart();
@@ -483,6 +550,26 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void b9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b9ActionPerformed
         calc.numPadAction(9);
     }//GEN-LAST:event_b9ActionPerformed
+
+    private void bBackSpaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackSpaceActionPerformed
+        calc.backSpaceAction();
+    }//GEN-LAST:event_bBackSpaceActionPerformed
+
+    private void bCleanNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCleanNumActionPerformed
+        calc.bCleanNumAction();
+    }//GEN-LAST:event_bCleanNumActionPerformed
+
+    private void bPowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPowActionPerformed
+        calc.calculationHub((short) 5);
+    }//GEN-LAST:event_bPowActionPerformed
+
+    private void bCleannerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCleannerActionPerformed
+        calc.cleanVariables(2);
+        calc.cleanVariables(3);
+        calc.cleanVariables(4);
+        calc.cleanVariables(5);
+        calc.writeZero();
+    }//GEN-LAST:event_bCleannerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,14 +605,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         CalculatorGUI calcGUI = new CalculatorGUI();
         calcGUI.getReferenceVariable(calcGUI);
@@ -555,8 +634,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
     public javax.swing.JButton bDiv;
     public javax.swing.JButton bEqual;
     public javax.swing.JButton bFloat;
-    public javax.swing.JButton bMaisMenos;
+    public javax.swing.JButton bMC;
+    public javax.swing.JButton bMMinus;
+    public javax.swing.JButton bMPlus;
+    public javax.swing.JButton bMR;
     public javax.swing.JButton bMult;
+    public javax.swing.JButton bNegative;
     public javax.swing.JButton bPerc;
     public javax.swing.JButton bPow;
     public javax.swing.JButton bRoot;
@@ -567,7 +650,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void getReferenceVariable(CalculatorGUI start) {
-        calc.sendReferenceVariable(start);
+        calc.takeReferenceVariable(start);
         calc.writeZero();
     }
 }

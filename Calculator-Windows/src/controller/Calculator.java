@@ -4,13 +4,14 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1845 Classe: 1281 Methods: 71
+ * @author Alex Bonadio Total Code Lines: 1960 Classe: 1313 Methods: 73
  */
 public class Calculator {
 
     private short operation = 0;             // 0 ainda não foi escolhido uma operação, 1 adição, 2 subtração, 3 multiplicacao, 4 divisão, 5 potenciação, 6 radiciação 7 a 10 porcentagem
     private short accOperation = 0;          // mantém salvo na memória a última operação aritmética realizada para ser usada no acumulador
     private double number = 0.0;             // armazena o valor digitado pelo usuário e também o resultado de cada operação aritmética
+    private double memory = 0.0;             // armazena o número na memória da Calculadora
     private double aux = 0.0;                // armazena e mantém salvo na memória o 2º operando para fazer a acumulação 
     private short countOpClick = 0;          // armazena a quantidade de vezes que o usuário clicou em um dos botões das operações aritméticas (nenhuma vez, 1 vez)
     private short equalsClick = 0;           // armazena a quantidade de vezes que o usuário clicou no sinal de = (nenhuma vez, 1 vez)
@@ -24,8 +25,24 @@ public class Calculator {
     }
 
     // método recebe a cópia da variável de referência do objeto calcGUI instanciado na classe CalculatorGUI
-    public void sendReferenceVariable(CalculatorGUI calcGUI) {
+    public void takeReferenceVariable(CalculatorGUI calcGUI) {
         this.calcGUI = calcGUI;  // salva a variável de referência e a torna global
+    }
+
+    // método adiciona o número na memória da Calculadora
+    public void memorise() {
+        memory = Double.valueOf(calcGUI.inputText.getText());
+    }
+    // método que chama o número salvo na memória
+    public void memoryRecall() {
+        pressedOpButton(); //   configura para false as variáveis globais que registram se o usuário já clicou uma ou mais vezes no botão de operações aritméticas e apaga a string no 1º Display para que seja impresso o número escolhido pelo usuário
+        formatAcc(memory);//    formata o double para não aparecer o ponto flutuante quando o número é inteiro
+        boolean check = formatDynamicallyNegativeNumber(); // coloca parênteses em volta de um número negativo
+        if (check == false) {  // se o número não for negativo
+            calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());  // imprime o número no 2º display
+        }
+        numpadTyped = true;  // registra que o usuário já clicou em algum número
+        focus(); // mantem o cursor no 1º display
     }
 
     // método valida a entrada do usuário, permitindo apenas números e o char E do euler 
@@ -72,6 +89,10 @@ public class Calculator {
             case 4:
                 accOperation = 0;
                 aux = 0;
+                focus();
+                break;
+            case 5:
+                memory = 0.0;
                 focus();
                 break;
             default:
@@ -434,7 +455,7 @@ public class Calculator {
 
     // método que formata a string no display principal, para não exibir o ponto flutuante, 
     // caso não seja um número decimal, por ex: 100, exibiria apenas 100, e não 100.0 
-    public void formatAcc() {
+    public void formatAcc(double number) {
         if (number == Math.floor(number)) {
             long numInt = (long) number;
             calcGUI.inputText.setText(String.valueOf(numInt));
@@ -643,7 +664,7 @@ public class Calculator {
     public boolean formatMaxSize() {
         boolean maxsize = false;
         int size = calcGUI.inputText.getText().length();  // é salvo em size o tamanho da string
-        if (size >= 40) {  // se a quant. de algarismos digitados pelo usuário for maior ou igual a 19
+        if (size >= 40) {  // se a quant. de algarismos digitados pelo usuário for maior ou igual a 40
             maxsize = true; // maxsize é configurado para true, então o usuário não conseguirá mais digitar algarismos
         }
         return maxsize;
@@ -712,7 +733,7 @@ public class Calculator {
         number = number + aux;
         boolean check = maxNumber(number);
         if (check == true) {
-            formatAcc();
+            formatAcc(number);
         }
     }
 
@@ -735,7 +756,7 @@ public class Calculator {
         number = number - aux;
         boolean check = maxNumber(number);
         if (check == true) {
-            formatAcc();
+            formatAcc(number);
         }
     }
 
@@ -758,7 +779,7 @@ public class Calculator {
         number = number * aux;
         boolean check = maxNumber(number);
         if (check == true) {
-            formatAcc();
+            formatAcc(number);
         }
     }
 
@@ -782,7 +803,7 @@ public class Calculator {
             number = number / aux;
             boolean check = maxNumber(number);
             if (check == true) {
-                formatAcc();
+                formatAcc(number);
             }
         } else {
             formatImpossibleToDivideBy0();
@@ -813,7 +834,7 @@ public class Calculator {
         number = Math.pow(number, aux);
         boolean check = maxNumber(number);
         if (check == true) {
-            formatAcc();
+            formatAcc(number);
         }
     }
 
@@ -920,7 +941,7 @@ public class Calculator {
         if (!calcGUI.inputText.getText().contains("Impossible")) {
             boolean check = maxNumber(number);
             if (check == true) {
-                formatAcc();
+                formatAcc(number);
                 mathExpression = mathExpression + " = " + calcGUI.inputText.getText();
                 calcGUI.labelExp.setText(mathExpression);
             }
@@ -1232,6 +1253,14 @@ public class Calculator {
 
     public void setAux(double aux) {
         this.aux = aux;
+    }
+
+    public double getMemory() {
+        return memory;
+    }
+
+    public void setMemory(double memory) {
+        this.memory = memory;
     }
 
     public short getCountOpClick() {
