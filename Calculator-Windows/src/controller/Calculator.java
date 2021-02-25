@@ -4,7 +4,7 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1960 Classe: 1313 Methods: 73
+ * @author Alex Bonadio Total Code Lines: 1990 Classe: 1319 Methods: 74
  */
 public class Calculator {
 
@@ -32,7 +32,13 @@ public class Calculator {
     // método adiciona o número na memória da Calculadora
     public void memorise() {
         memory = Double.valueOf(calcGUI.inputText.getText());
+        calcGUI.displayMem.setText(String.valueOf(memory));
     }
+    // método escreve Memória no Display da Memória
+    public void writeMemory() {
+        calcGUI.displayMem.setText("Memória");
+    }
+
     // método que chama o número salvo na memória
     public void memoryRecall() {
         pressedOpButton(); //   configura para false as variáveis globais que registram se o usuário já clicou uma ou mais vezes no botão de operações aritméticas e apaga a string no 1º Display para que seja impresso o número escolhido pelo usuário

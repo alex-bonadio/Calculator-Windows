@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1960 Classe: 647 Methods: 29
+ * @author Alex Bonadio Total Code Lines: 1990 Classe: 671 Methods: 29
  */
 public class CalculatorGUI extends javax.swing.JFrame {
 
@@ -46,6 +46,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         bCleanNum = new javax.swing.JButton();
         bPow = new javax.swing.JButton();
         bCleanner = new javax.swing.JButton();
+        displayMem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculator");
@@ -319,15 +320,23 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
 
+        displayMem.setForeground(new java.awt.Color(255, 51, 51));
+        displayMem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        displayMem.setText("Memória");
+        displayMem.setToolTipText("Número Salvo na Memória");
+        displayMem.setMaximumSize(new java.awt.Dimension(0, 0));
+        displayMem.setMinimumSize(new java.awt.Dimension(0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inputText)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(displayMem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inputText, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelExp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -393,7 +402,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 .addComponent(inputText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelExp, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
+                .addComponent(displayMem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(bMPlus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -444,7 +455,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
                         .addComponent(bFloat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(bEqual, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bNegative, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b0, bNegative});
@@ -500,6 +511,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void bMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMCActionPerformed
         calc.cleanVariables(5);
+        calc.writeMemory();
     }//GEN-LAST:event_bMCActionPerformed
 
     private void bSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSubActionPerformed
@@ -541,6 +553,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void bMMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMMinusActionPerformed
         calc.cleanVariables(5);
+        calc.writeMemory();
     }//GEN-LAST:event_bMMinusActionPerformed
 
     private void bPercActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPercActionPerformed
@@ -569,6 +582,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         calc.cleanVariables(4);
         calc.cleanVariables(5);
         calc.writeZero();
+        calc.writeMemory();
     }//GEN-LAST:event_bCleannerActionPerformed
 
     /**
@@ -645,6 +659,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     public javax.swing.JButton bRoot;
     public javax.swing.JButton bSub;
     public javax.swing.JButton bSum;
+    public javax.swing.JLabel displayMem;
     public javax.swing.JTextField inputText;
     public javax.swing.JLabel labelExp;
     // End of variables declaration//GEN-END:variables
