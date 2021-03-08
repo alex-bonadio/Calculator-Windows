@@ -682,10 +682,10 @@
     <Component class="javax.swing.JLabel" name="displayMem">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="ff" type="rgb"/>
+          <Color blue="ff" green="66" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Mem&#xf3;ria"/>
+        <Property name="text" type="java.lang.String" value="Memory"/>
         <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero Salvo na Mem&#xf3;ria"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[0, 0]"/>

@@ -4,7 +4,7 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1990 Classe: 1319 Methods: 74
+ * @author Alex Bonadio Total Code Lines: 1996 Classe: 1325 Methods: 74
  */
 public class Calculator {
 
@@ -32,11 +32,17 @@ public class Calculator {
     // método adiciona o número na memória da Calculadora
     public void memorise() {
         memory = Double.valueOf(calcGUI.inputText.getText());
-        calcGUI.displayMem.setText(String.valueOf(memory));
+        if (memory == Math.floor(memory)) {
+            long numInt = (long) memory;
+            calcGUI.displayMem.setText("Memory: " + String.valueOf(numInt));
+        } else {
+            calcGUI.displayMem.setText("Memory: " + String.valueOf(memory));
+        }
     }
+
     // método escreve Memória no Display da Memória
     public void writeMemory() {
-        calcGUI.displayMem.setText("Memória");
+        calcGUI.displayMem.setText("Memory");
     }
 
     // método que chama o número salvo na memória

@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1990 Classe: 671 Methods: 29
+ * @author Alex Bonadio Total Code Lines: 1996 Classe: 671 Methods: 29
  */
 public class CalculatorGUI extends javax.swing.JFrame {
 
@@ -320,9 +320,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
 
-        displayMem.setForeground(new java.awt.Color(255, 51, 51));
+        displayMem.setForeground(new java.awt.Color(0, 102, 255));
         displayMem.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        displayMem.setText("Memória");
+        displayMem.setText("Memory");
         displayMem.setToolTipText("Número Salvo na Memória");
         displayMem.setMaximumSize(new java.awt.Dimension(0, 0));
         displayMem.setMinimumSize(new java.awt.Dimension(0, 0));
