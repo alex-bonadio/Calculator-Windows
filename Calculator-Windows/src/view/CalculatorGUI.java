@@ -3,7 +3,7 @@ package view;
 import controller.Calculator;
 
 /**
- * @author Alex Bonadio Total Code Lines: 2012 Classe: 671 Methods: 29
+ * @author Alex Bonadio Total Code Lines: 2014 Classe: 673 Methods: 29
  */
 public class CalculatorGUI extends javax.swing.JFrame {
 
@@ -510,6 +510,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bMPlusActionPerformed
 
     private void bMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMCActionPerformed
+        calc.validateNumber();
         calc.cleanVariables(5);
         calc.writeMemory();
     }//GEN-LAST:event_bMCActionPerformed
@@ -552,6 +553,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bMRActionPerformed
 
     private void bMMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMMinusActionPerformed
+        calc.validateNumber();
         calc.cleanVariables(5);
         calc.writeMemory();
     }//GEN-LAST:event_bMMinusActionPerformed
