@@ -4,7 +4,7 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 1996 Classe: 1325 Methods: 74
+ * @author Alex Bonadio Total Code Lines: 2012 Classe: 1341 Methods: 74
  */
 public class Calculator {
 
@@ -31,15 +31,24 @@ public class Calculator {
 
     // método adiciona o número na memória da Calculadora
     public void memorise() {
-        memory = Double.valueOf(calcGUI.inputText.getText());
-        if (memory == Math.floor(memory)) {
-            long numInt = (long) memory;
-            calcGUI.displayMem.setText("Memory: " + String.valueOf(numInt));
-        } else {
-            calcGUI.displayMem.setText("Memory: " + String.valueOf(memory));
+        boolean tested = validateNumber();  // método verifica se só tem números no 1º display
+        if (tested == true) { // se a entrada está correta, ou seja, possui apenas números ou o E, então é true
+            boolean validated = maxNumber(memory); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
+            if (validated == true) {
+                memory = Double.valueOf(calcGUI.inputText.getText());
+                if (memory == Math.floor(memory)) {
+                    long numInt = (long) memory;
+                    calcGUI.displayMem.setText("Memory: " + String.valueOf(numInt));
+                } else {
+                    calcGUI.displayMem.setText("Memory: " + String.valueOf(memory));
+                }
+            } else {
+                calcGUI.displayMem.setText("Memory: Maximum number exceeded");
+                cleanVariables(5);
+            }
         }
+        focus();
     }
-
     // método escreve Memória no Display da Memória
     public void writeMemory() {
         calcGUI.displayMem.setText("Memory");
@@ -48,13 +57,16 @@ public class Calculator {
     // método que chama o número salvo na memória
     public void memoryRecall() {
         pressedOpButton(); //   configura para false as variáveis globais que registram se o usuário já clicou uma ou mais vezes no botão de operações aritméticas e apaga a string no 1º Display para que seja impresso o número escolhido pelo usuário
-        formatAcc(memory);//    formata o double para não aparecer o ponto flutuante quando o número é inteiro
-        boolean check = formatDynamicallyNegativeNumber(); // coloca parênteses em volta de um número negativo
-        if (check == false) {  // se o número não for negativo
-            calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());  // imprime o número no 2º display
+        boolean tested = validateNumber();  // método verifica se só tem números no 1º display
+        if (tested == true) { // se a entrada está correta, ou seja, possui apenas números ou o E, então é true
+            formatAcc(memory);//    formata o double para não aparecer o ponto flutuante quando o número é inteiro
+            boolean check = formatDynamicallyNegativeNumber(); // coloca parênteses em volta de um número negativo
+            if (check == false) {  // se o número não for negativo
+                calcGUI.labelExp.setText(mathExpression + " " + calcGUI.inputText.getText());  // imprime o número no 2º display
+            }
+            numpadTyped = true;  // registra que o usuário já clicou em algum número
+            focus(); // mantem o cursor no 1º display
         }
-        numpadTyped = true;  // registra que o usuário já clicou em algum número
-        focus(); // mantem o cursor no 1º display
     }
 
     // método valida a entrada do usuário, permitindo apenas números e o char E do euler 
@@ -71,6 +83,10 @@ public class Calculator {
                 // calcGUI.inputText.getText().matches("^[-0.0-9.0]*$");
                 check = true;  // true significa que passou na validação, não tem caracteres inválidos
             }
+        }
+        if (calcGUI.displayMem.getText().contains("Maximum")) { // se no display da memória contém Maximum
+            writeMemory(); // então imprime Memory nele
+            cleanVariables(5); // zera a variável memory
         }
         return check;
     }
@@ -672,7 +688,7 @@ public class Calculator {
         }
     }
 
-    // se o tamanho da string do 1º display ultrapassar 19 algarismos, os botões númericos serão bloqueados
+    // se o tamanho da string do 1º display ultrapassar 40 algarismos, os botões númericos serão bloqueados
     public boolean formatMaxSize() {
         boolean maxsize = false;
         int size = calcGUI.inputText.getText().length();  // é salvo em size o tamanho da string
