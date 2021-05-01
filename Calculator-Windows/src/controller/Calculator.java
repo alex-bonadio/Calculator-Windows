@@ -85,7 +85,7 @@ public class Calculator {
             }
         }
         if (calcGUI.displayMem.getText().contains("Maximum")) { // se no display da memória contém Maximum
-            writeMemory(); // então imprime Memory nele
+            writeMemory();     // então imprime Memory nele
             cleanVariables(5); // zera a variável memory
         }
         return check;
