@@ -877,7 +877,7 @@ public class Calculator {
         }
     }
 
-    // método faz o calculo de raiz enésima
+    // método faz o cálculo de raiz enésima
     public void simpleRoot() {
         formatResult();
         aux = Double.valueOf(calcGUI.inputText.getText());
