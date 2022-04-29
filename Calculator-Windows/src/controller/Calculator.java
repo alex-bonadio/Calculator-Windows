@@ -446,7 +446,7 @@ public class Calculator {
                 break;
             case 6:
                 double num = Double.valueOf(calcGUI.inputText.getText());
-                number = Math.pow(num, 1 / number);
+                number = Math.pow(num, 1 / aux);
                 break;
         }
     }
@@ -877,7 +877,7 @@ public class Calculator {
         }
     }
 
-    // método faz o calculo de raiz quadrada
+    // método faz o calculo de raiz enésima
     public void simpleRoot() {
         formatResult();
         aux = Double.valueOf(calcGUI.inputText.getText());
