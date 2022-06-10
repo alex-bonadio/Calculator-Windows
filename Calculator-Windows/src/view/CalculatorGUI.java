@@ -1,6 +1,7 @@
 package view;
 
-import controller.Calculator;
+import model.Calculator;
+import controller.CalcControl;
 
 /**
  * @author Alex Bonadio Total Code Lines: 2014 Classe: 673 Methods: 29

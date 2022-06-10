@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
@@ -49,6 +49,7 @@ public class Calculator {
         }
         focus();
     }
+
     // método escreve Memória no Display da Memória
     public void writeMemory() {
         calcGUI.displayMem.setText("Memory");
@@ -500,7 +501,8 @@ public class Calculator {
             long numInt = (long) number;
             num = String.valueOf(numInt);
         } else {
-            num = String.format("%.2f", number);
+            //   num = String.format("%.2f", number);
+            num = String.valueOf(number); // se for um número decimal a variável number é convertida em String
         }
         return num;
     }
