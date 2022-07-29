@@ -501,7 +501,7 @@ public class Calculator {
             long numInt = (long) number;
             num = String.valueOf(numInt);
         } else {
-            //   num = String.format("%.2f", number);
+            //  num = String.format("%.2f", number);
             num = String.valueOf(number); // se for um número decimal a variável number é convertida em String
         }
         return num;
@@ -998,7 +998,8 @@ public class Calculator {
     public void negativeNumber() {
         if (!calcGUI.inputText.getText().isEmpty()) {
             boolean maxsize = formatMaxSize();
-            if (maxsize == false && equalsClick == 0) {
+           // if (maxsize == false && equalsClick == 0) {
+            if (maxsize == false/* && equalsClick == 0*/) {    
                 String input = "";  // String input = calcGUI.inputText.getText();
                 String signal = "";
                 if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
