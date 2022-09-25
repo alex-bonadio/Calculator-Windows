@@ -890,7 +890,7 @@ public class Calculator {
         }
     }
 
-    // método prepara as variavies para poder ser feito os cálculos de porcentagem
+    // método prepara as variáveis para poder ser feito os cálculos de porcentagem
     // misturados com as operações aritméticas básicas
     public void percentStart() {
         boolean check = validateNumber();  // verifica se a entrada do usuário tem apenas números
