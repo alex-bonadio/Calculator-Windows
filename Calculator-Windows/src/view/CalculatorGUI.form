@@ -95,8 +95,8 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="bMMinus" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="bBackSpace" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="bBackSpace" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="bPow" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
@@ -134,7 +134,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Component id="bBackSpace" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="bPow" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="bPow" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="bCleanNum" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>

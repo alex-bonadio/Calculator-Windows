@@ -4,7 +4,8 @@ import view.CalculatorGUI;
 import java.awt.event.KeyEvent;
 
 /**
- * @author Alex Bonadio Total Code Lines: 2012 Classe: 1341 Methods: 74
+ * @author Alex Bonadio Total Code Lines: 2012 Classe: 1341 Methods: 74 Sem o
+ * Construtor e os getters and setters: 54
  */
 public class Calculator {
 
@@ -35,17 +36,22 @@ public class Calculator {
         if (tested == true) { // se a entrada está correta, ou seja, possui apenas números ou o E, então é true
             boolean validated = maxNumber(memory); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
             if (validated == true) {
-                memory = Double.valueOf(calcGUI.inputText.getText());
-                if (memory == Math.floor(memory)) {
-                    long numInt = (long) memory;
-                    calcGUI.displayMem.setText("Memory: " + String.valueOf(numInt));
-                } else {
-                    calcGUI.displayMem.setText("Memory: " + String.valueOf(memory));
+                double temporaryNumber = Double.valueOf(calcGUI.inputText.getText());
+                if (temporaryNumber != 0) {
+                    memory = Double.valueOf(calcGUI.inputText.getText());
+
+                    if (memory == Math.floor(memory)) {
+                        long numInt = (long) memory;
+                        calcGUI.displayMem.setText("Memory: " + String.valueOf(numInt));
+                    } else {
+                        calcGUI.displayMem.setText("Memory: " + String.valueOf(memory));
+                    }
                 }
             } else {
                 calcGUI.displayMem.setText("Memory: Maximum number exceeded");
                 cleanVariables(5);
             }
+
         }
         focus();
     }
@@ -150,7 +156,7 @@ public class Calculator {
                     simplePow(); // Potenciação
                     break;
                 case 6:
-                    simpleRoot(); // raiz quadrada
+                    simpleRoot(); // raiz enésima
                     break;
                 case 7:               // caso 7, chama o método que calcula porcentagem
                     percentCalc();   // com soma
@@ -518,7 +524,7 @@ public class Calculator {
         }
     }
 
-    // método formata a string do 2º display, durante as opereção aritméticas complexas
+    // método formata a string do 2º display, durante as operação aritméticas complexas
     // ex: 2 + 9 = 11 * 5 = 605
     public void formatComplexOp() {
         String signal = "";
@@ -998,8 +1004,8 @@ public class Calculator {
     public void negativeNumber() {
         if (!calcGUI.inputText.getText().isEmpty()) {
             boolean maxsize = formatMaxSize();
-           // if (maxsize == false && equalsClick == 0) {
-            if (maxsize == false/* && equalsClick == 0*/) {    
+            // if (maxsize == false && equalsClick == 0) {
+            if (maxsize == false/* && equalsClick == 0*/) {
                 String input = "";  // String input = calcGUI.inputText.getText();
                 String signal = "";
                 if (Double.valueOf(calcGUI.inputText.getText()) == 0) {
