@@ -178,8 +178,8 @@ public class Calculator {
     public void equalsAction() { // chama os métodos que fazem os cálculos
         boolean check = validateNumber(); // verifica se o resultado do cálculo não ultrapassou o limite da calculadora ou se tem algum caractere, ao invés de números
         if (check == true) { // TRUE significa que o número está OK
-            boolean validado = maxNumber(number); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
-            if (validado == true) {
+            boolean validated = maxNumber(number); // Verifica se resultado do cálculo não ultrapassou o limite da calculadora 
+            if (validated == true) {
                 arithmeticSwitch();  // este método chama os métodos de operação aritmética simples, ex: 2 + 2, 4-2, 10 * 2 ... 
                 formatLimit(operation); // este método verifica se o tamanho da string do 2º display é maior do que o tamanho do próprio jLabel que mostra a expressão matemática, e a apaga totalmente se ultrapassar o seu limite, e só exibe o resultado do último cálculo realizado
                 if (equalsClick == 1) { // se o usuário clicou mais de uma vez no igual, então é feito a acumulação do resultado
