@@ -668,8 +668,8 @@ public class CalculatorGUI extends javax.swing.JFrame {
     public javax.swing.JLabel labelExp;
     // End of variables declaration//GEN-END:variables
 
-    public void getReferenceVariable(CalculatorGUI start) {
-        calc.takeReferenceVariable(start);
+    public void getReferenceVariable(CalculatorGUI calcGUI) {
+        calc.takeReferenceVariable(calcGUI);
         calc.writeZero();
     }
 }
